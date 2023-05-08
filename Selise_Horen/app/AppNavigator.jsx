@@ -1,8 +1,8 @@
-import 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useState } from 'react';
-import AppNavigator from './screen/AuthUser/SideBarNavigation';
-import LoginSignUpNav from './screen/LoginSignUpNav';
+import "react-native-gesture-handler";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
+import AppNavigator from "./screen/AuthUser/SideBarNavigation";
+import LoginSignUpNav from "./screen/LoginSignUpNav";
 
 const App = () => {
   // try {
@@ -18,7 +18,7 @@ const App = () => {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const token = await AsyncStorage.getItem('token');
+        const token = await AsyncStorage.getItem("token");
         if (token) setLoggedIn(true);
       } catch (error) {
         console.log(error);
@@ -28,13 +28,13 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      {!loggedIn ? (
-        <LoginSignUpNav></LoginSignUpNav>
-      ) : (
-        <AppNavigator></AppNavigator>
-      )}
-    </>
+    // <>
+    //   {!loggedIn ? (
+    //     <LoginSignUpNav></LoginSignUpNav>
+    //   ) : (
+    <AppNavigator></AppNavigator>
+    //    )}
+    // </>
   );
 };
 
