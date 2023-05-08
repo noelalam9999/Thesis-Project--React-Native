@@ -1,39 +1,35 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, Switch } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import { FontAwesome } from "@expo/vector-icons";
-import coin from "../../assets/image/coin3.png";
-import sport5 from "../../assets/image/sport5.jpg";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, Switch } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import coin from '../../../assets/image/coin3.png';
+import sport5 from '../../../assets/image/sport5.jpg';
 
 const LeaderboardScreen = () => {
   const [isTodaySelected, setIsTodaySelected] = useState(true);
 
   return (
     <LinearGradient
-      colors={["#FE8577", "#FFBE6D"]}
+      colors={['#FE8577', '#FFBE6D']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={{
         flex: 1,
-        position: "relative",
-      }}
-    >
-      {/* <View>
+        position: 'relative',
+      }}>
+      <View>
         <Image source={sport5} />
-      </View> */}
+      </View>
       <View
         style={{
-          width: "100%",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
+          width: '100%',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           marginTop: 20,
           marginBottom: 10,
           paddingHorizontal: 20,
-        }}
-      >
-        <Text>{isTodaySelected ? "Today" : "Week"}</Text>
+        }}>
+        <Text>{isTodaySelected ? 'Today' : 'Week'}</Text>
         <Switch
           value={isTodaySelected}
           onValueChange={(value) => setIsTodaySelected(value)}
@@ -41,32 +37,30 @@ const LeaderboardScreen = () => {
       </View>
       <View
         style={{
-          position: "absolute",
+          position: 'absolute',
           height: 300,
           bottom: -10,
           left: 20,
           //   right: 20,
-          backgroundColor: "white",
-          width: "90%",
+          backgroundColor: 'white',
+          width: '90%',
           borderRadius: 10,
           flex: 1,
-          justifyContent: "space-around",
-          alignItems: "center",
-        }}
-      >
+          justifyContent: 'space-around',
+          alignItems: 'center',
+        }}>
         <View
           style={{
             // flex: 1,
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >
+            width: '100%',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}>
           <Text>4</Text>
           <View>
             <Text>D.vas</Text>
           </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Image
               source={coin}
               style={{ width: 20, height: 20, marginRight: 5 }}
@@ -76,16 +70,15 @@ const LeaderboardScreen = () => {
         </View>
         <View
           style={{
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >
+            width: '100%',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}>
           <Text>4</Text>
           <View>
             <Text>D.vas</Text>
           </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Image
               source={coin}
               style={{ width: 20, height: 20, marginRight: 5 }}
@@ -96,16 +89,15 @@ const LeaderboardScreen = () => {
         <View
           style={{
             // flex: 1,
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >
+            width: '100%',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}>
           <Text>4</Text>
           <View>
             <Text>D.vas</Text>
           </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Image
               source={coin}
               style={{ width: 20, height: 20, marginRight: 5 }}
@@ -200,59 +192,59 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 16,
     paddingTop: 16,
-    width: "100%",
+    width: '100%',
   },
   title: {
     fontSize: 24,
-    color: "#fff",
-    fontWeight: "bold",
+    color: '#fff',
+    fontWeight: 'bold',
   },
   leaderboardEntries: {
     marginTop: 32,
     paddingHorizontal: 16,
   },
   leaderboardEntry: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "#fff",
+    borderBottomColor: '#fff',
   },
   rankIconContainer: {
     marginRight: 16,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: "#fff",
-    position: "relative",
+    backgroundColor: '#fff',
+    position: 'relative',
   },
   rank: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
-    width: "100%",
-    textAlign: "center",
+    width: '100%',
+    textAlign: 'center',
     fontSize: 20,
-    fontWeight: "bold",
-    color: "black",
+    fontWeight: 'bold',
+    color: 'black',
   },
   username: {
     flex: 1,
     fontSize: 18,
-    color: "#fff",
+    color: '#fff',
     marginLeft: 16,
   },
   score: {
     fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
 
