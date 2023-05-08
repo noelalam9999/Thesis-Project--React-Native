@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -16,6 +17,19 @@ import {
 } from "@react-navigation/drawer";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { StatusBar, StyleSheet } from "react-native";
+=======
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import HomeScreen from './screen/HomeScreen';
+import ProfileScreen from './screen/profilescreen';
+import NotificationScreen from './screen/NotificationScreen';
+import LoginScreen from './screen/LoginScreen';
+import SignupScreen from './screen/SignupScree';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { StatusBar } from 'react-native';
+>>>>>>> 52afe717ee4db9947f9b9eb57ac400adef566b52
 const Tab = createMaterialBottomTabNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -23,6 +37,7 @@ const Drawer = createDrawerNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
+<<<<<<< HEAD
       barStyle={{ backgroundColor: "black" }}
       screenOptions={({ route }) => ({
         title: "", // This is the main part...
@@ -34,13 +49,19 @@ const TabNavigator = () => {
         inactiveTintColor: "gray",
       }}
     >
+=======
+      barStyle={{ backgroundColor: 'black' }}
+      tabBarOptions={{
+        activeTintColor: 'white',
+      }}>
+>>>>>>> 52afe717ee4db9947f9b9eb57ac400adef566b52
       <Tab.Screen
         name="Home2"
         component={HomeScreen}
         options={{
           tabBarIcon: () => <Icon name="home" size={24} color="#F7CF47" />,
           tabBarLabelStyle: {
-            color: "white",
+            color: 'white',
           },
         }}
       />
@@ -52,7 +73,11 @@ const TabNavigator = () => {
             <MaterialIcons name="leaderboard" size={24} color="#F7CF47" />
           ),
           tabBarLabelStyle: {
+<<<<<<< HEAD
             color: "white",
+=======
+            fontWeight: 'bold',
+>>>>>>> 52afe717ee4db9947f9b9eb57ac400adef566b52
           },
         }}
       />
@@ -62,11 +87,16 @@ const TabNavigator = () => {
 
 const AppNavigator = () => {
   return (
+<<<<<<< HEAD
     <NavigationContainer>
+=======
+    <NavigationContainer style={{ backgroundColor: 'black' }}>
+>>>>>>> 52afe717ee4db9947f9b9eb57ac400adef566b52
       <StatusBar barStyle="light-content" backgroundColor="black" />
       <Drawer.Navigator
         screenOptions={{
           drawerStyle: {
+<<<<<<< HEAD
             backgroundColor: "#000000",
           },
           drawerActiveTintColor: "white",
@@ -80,6 +110,20 @@ const AppNavigator = () => {
           },
         }}
       >
+=======
+            backgroundColor: 'black',
+          },
+          drawerActiveTintColor: 'white',
+          drawerInactiveTintColor: 'white',
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          headerTintColor: 'white',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}>
+>>>>>>> 52afe717ee4db9947f9b9eb57ac400adef566b52
         <Drawer.Screen
           name="Home"
           options={{
