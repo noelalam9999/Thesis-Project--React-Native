@@ -8,9 +8,8 @@ const Stack = createStackNavigator();
 
 export default LoginSignUp = () => {
   return (
-    <NavigationContainer style={{ backgroundColor: 'black' }}>
+    <NavigationContainer style={{ backgroundColor: '#F7CF47' }}>
       <StatusBar barStyle="light-content" backgroundColor="#F7CF47" />
-
       <Stack.Navigator
         screenOptions={{
           headerStyle: {

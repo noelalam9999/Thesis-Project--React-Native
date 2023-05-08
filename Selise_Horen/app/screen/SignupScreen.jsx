@@ -1,8 +1,17 @@
-import React from "react";
-import { View, Text, Button, TextInput, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import React from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SignupScreen = () => {
+const SignupScreen = ({ navigation }) => {
+  function goBack() {
+    navigation.goBack();
+  }
   return (
     <View style={styles.screen}>
       <Text>LOGO</Text>
@@ -10,36 +19,33 @@ const SignupScreen = () => {
         <TextInput
           style={styles.input}
           placeholder="Username"
-          placeholderTextColor="#666666"
-        ></TextInput>
+          placeholderTextColor="#666666"></TextInput>
         <TextInput
           style={styles.input}
           placeholder="Email"
-          placeholderTextColor="#666666"
-        ></TextInput>
+          placeholderTextColor="#666666"></TextInput>
         <TextInput
           style={styles.input}
           placeholder="Address"
-          placeholderTextColor="#666666"
-        ></TextInput>
+          placeholderTextColor="#666666"></TextInput>
         <TextInput
           style={styles.input}
           placeholder="Password"
-          placeholderTextColor="#666666"
-        ></TextInput>
+          placeholderTextColor="#666666"></TextInput>
         <TextInput
           style={styles.input}
           placeholder="Confirm Password"
-          placeholderTextColor="#666666"
-        ></TextInput>
+          placeholderTextColor="#666666"></TextInput>
 
         <TouchableOpacity style={styles.btn}>
-          <Text style={{ color: "white" }}>Sign Up</Text>
+          <Text style={{ color: 'white' }}>Sign Up</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.loginContainer}>
         <Text style={styles.loginText}>Already have an account?</Text>
-        <Text style={styles.loginLink}>Log in</Text>
+        <Text style={styles.loginLink} onPress={goBack}>
+          Log in
+        </Text>
       </View>
     </View>
   );
@@ -48,21 +54,21 @@ const SignupScreen = () => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#F7CF47",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#F7CF47',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   titleContainer: {
     marginBottom: 40,
-    alignItems: "center",
+    alignItems: 'center',
   },
   title: {
     fontSize: 30,
-    fontWeight: "bold",
-    color: "#000000",
+    fontWeight: 'bold',
+    color: '#000000',
   },
   form: {
-    width: "80%",
+    width: '80%',
   },
   input: {
     height: 40,
@@ -70,31 +76,31 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
 
     borderBottomWidth: 0.5,
-    borderBottomColor: "#000000",
+    borderBottomColor: '#000000',
   },
   btn: {
     borderRadius: 200,
     width: 100,
 
     padding: 10,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
 
-    backgroundColor: "#000000",
+    backgroundColor: '#000000',
   },
 
   loginContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 20,
   },
   loginText: {
-    color: "black",
+    color: 'black',
     marginRight: 5,
   },
   loginLink: {
-    color: "black",
-    fontWeight: "bold",
-    textDecorationLine: "underline",
+    color: 'black',
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
   },
 });
 export default SignupScreen;

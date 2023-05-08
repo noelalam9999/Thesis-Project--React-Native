@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,21 +6,44 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   function showRegister() {
     navigation.navigate('SignUp');
     console.log(navigation);
+  }
+
+  async function login() {
+    try {
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <View style={styles.screen}>
       <Text>LOGO</Text>
       <View style={styles.form}>
-        <TextInput style={styles.input} placeholder="Username"></TextInput>
-        <TextInput style={styles.input} placeholder="Email"></TextInput>
+        <TextInput
+          keyboardType="email-address"
+          style={styles.input}
+          placeholder="Email"
+          onChangeText={(text) => {
+            setEmail(text);
+          }}></TextInput>
+        <TextInput
+          secureTextEntry="true"
+          style={styles.input}
+          placeholder="Password"
+          onChangeText={(text) => {
+            setPassword(text);
+          }}></TextInput>
 
         <View style={styles.center}>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={login}>
             <Text style={{ color: 'white' }}>Log In</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn} onPress={showRegister}>
