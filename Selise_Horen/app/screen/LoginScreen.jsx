@@ -25,7 +25,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#F9C900",
+    backgroundColor: "#F7CF47",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
 
     borderBottomWidth: 0.5,
-    borderBottomColor: "black",
+    borderBottomColor: "#000000",
   },
   btn: {
     borderRadius: 200,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
 
-    backgroundColor: "black",
+    backgroundColor: "#000000",
   },
 });
 
