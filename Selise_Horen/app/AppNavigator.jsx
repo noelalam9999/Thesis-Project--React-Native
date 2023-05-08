@@ -9,6 +9,7 @@ import SignupScreen from './screen/SignupScree';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { StatusBar } from 'react-native';
+import LeaderboardScreen from './screen/leaderboardScreen';
 const Tab = createMaterialBottomTabNavigator();
 
 const Drawer = createDrawerNavigator();
