@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SignupScreen = () => {
@@ -22,6 +22,7 @@ const SignupScreen = () => {
           placeholder="Address"
           placeholderTextColor="#666666"
         ></TextInput>
+
         <TextInput
           style={styles.input}
           placeholder="Password"

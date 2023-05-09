@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, Switch } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Switch,
+  ScrollView,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import coin from "../../../assets/image/coin3.png";
 import sport5 from "../../../assets/image/sport5.png";
 import noel_bhai_modified from "../../../assets/image/noel_bhai_modified.png";
+// import samiya_apu from "../../../assets/image/.png";
 
 const LeaderboardScreen = () => {
   const [isTodaySelected, setIsTodaySelected] = useState(true);
@@ -37,7 +45,7 @@ const LeaderboardScreen = () => {
           }}
         >
           <Text style={{ color: "#F7CF47", fontSize: 18 }}>
-            {isTodaySelected ? "Today" : "Week"}
+            {isTodaySelected ? "Week" : "Today"}
           </Text>
         </View>
 
@@ -104,80 +112,348 @@ const LeaderboardScreen = () => {
         />
         <Image source={sport5} style={{ width: 300, height: 321 }} />
       </View>
+
       <View
         style={{
           position: "absolute",
           height: 300,
           bottom: -10,
           left: 20,
-          //   right: 20,
           backgroundColor: "#000000",
           width: "90%",
+
           borderRadius: 10,
-          flex: 1,
           justifyContent: "space-around",
           alignItems: "center",
         }}
       >
-        <View
-          style={{
-            // flex: 1,
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >
-          <Text style={{ color: "#F7CF47", fontSize: 20 }}>4</Text>
-          <View>
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+        <ScrollView style={{ height: 280 }}>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+              flex: 1,
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}>4</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
           </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Image
-              source={coin}
-              style={{ width: 20, height: 20, marginRight: 5 }}
-            />
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}>5</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={{
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >
-          <Text style={{ color: "#F7CF47", fontSize: 20 }}>4</Text>
-          <View>
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 6</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
           </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Image
-              source={coin}
-              style={{ width: 20, height: 20, marginRight: 5 }}
-            />
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
           </View>
-        </View>
-        <View
-          style={{
-            // flex: 1,
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >
-          <Text style={{ color: "#F7CF47", fontSize: 20 }}> 4</Text>
-          <View>
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
           </View>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Image
-              source={coin}
-              style={{ width: 20, height: 20, marginRight: 5 }}
-            />
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
           </View>
-        </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+
+          <View
+            style={{
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
+            <View>
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={coin}
+                style={{ width: 20, height: 20, marginRight: 5 }}
+              />
+              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+            </View>
+          </View>
+        </ScrollView>
       </View>
     </LinearGradient>
   );

@@ -3,6 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import AppNavigator from "./screen/AuthUser/SideBarNavigation";
 import LoginSignUpNav from "./screen/LoginSignUpNav";
+import { View } from "react-native";
 
 const App = () => {
   // try {
@@ -28,13 +29,13 @@ const App = () => {
   }, []);
 
   return (
-    // <>
-    //   {!loggedIn ? (
-    //     <LoginSignUpNav></LoginSignUpNav>
-    //   ) : (
-    <AppNavigator></AppNavigator>
-    //    )}
-    // </>
+    <>
+      {!loggedIn ? (
+        <LoginSignUpNav></LoginSignUpNav>
+      ) : (
+        <AppNavigator></AppNavigator>
+      )}
+    </>
   );
 };
 
