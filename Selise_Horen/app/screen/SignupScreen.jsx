@@ -5,6 +5,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -20,7 +21,7 @@ const SignupScreen = ({ navigation }) => {
 
   function signup() {
     if (userInfo.password && confPass === userInfo.password) {
-      console.log(userInfo)
+      console.log(userInfo);
     } else {
       console.log('Did not match');
     }
