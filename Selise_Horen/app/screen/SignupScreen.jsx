@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Icon from "react-native-vector-icons/FontAwesome";
 import {
   View,
   Text,
@@ -128,6 +129,12 @@ const SignupScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.btn} onPress={signup}>
           <Text style={{ color: "white" }}>Sign Up</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.googleButton}>
+          <View style={styles.googleButtonIcon}>
+            <Icon name="google" size={20} color="white" />
+          </View>
+          <Text style={styles.googleButtonText}>Sign in with Google</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.loginContainer}>
         <Text style={styles.loginText}>Already have an account?</Text>
@@ -194,13 +201,30 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     padding: 10,
     borderRadius: 5,
-    marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   buttonText: {
     color: "#FFF",
     fontWeight: "bold",
     textAlign: "center",
+  },
+  googleButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#000000",
+    borderRadius: 4,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginTop: 20,
+  },
+  googleButtonIcon: {
+    marginRight: 8,
+  },
+  googleButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
 export default SignupScreen;
