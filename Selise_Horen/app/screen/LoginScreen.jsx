@@ -1,26 +1,26 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
-} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const passField = useRef();
 
   function showRegister() {
-    navigation.navigate('SignUp');
+    navigation.navigate("SignUp");
   }
 
   async function login() {
     try {
-      await AsyncStorage.setItem('token', 'newToken');
+      await AsyncStorage.setItem("token", "newToken");
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +42,8 @@ const LoginScreen = ({ navigation }) => {
             setEmail(text);
           }}
           blurOnSubmit={false}
-          onSubmitEditing={() => passField.current.focus()}></TextInput>
+          onSubmitEditing={() => passField.current.focus()}
+        ></TextInput>
         <TextInput
           autoCapitalize="none"
           autoCorrect={false}
@@ -55,14 +56,15 @@ const LoginScreen = ({ navigation }) => {
             setPassword(text);
           }}
           ref={passField}
-          onSubmitEditing={login}></TextInput>
+          onSubmitEditing={login}
+        ></TextInput>
 
         <View style={styles.center}>
           <TouchableOpacity style={styles.btn} onPress={login}>
-            <Text style={{ color: 'white' }}>Log In</Text>
+            <Text style={{ color: "white" }}>Log In</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn} onPress={showRegister}>
-            <Text style={{ color: 'white' }}>Register</Text>
+            <Text style={{ color: "white" }}>Register</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -72,12 +74,12 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#F7CF47',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#F7CF47",
+    justifyContent: "center",
+    alignItems: "center",
   },
   form: {
-    width: '80%',
+    width: "80%",
   },
   input: {
     height: 40,
@@ -85,23 +87,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
 
     borderBottomWidth: 0.5,
-    borderBottomColor: '#000000',
+    borderBottomColor: "#000000",
   },
   btn: {
     borderRadius: 200,
     width: 100,
 
     padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginBottom: 10,
+    justifyContent: "center",
+    alignItems: "center",
 
-    backgroundColor: '#000000',
+    backgroundColor: "#000000",
   },
   center: {
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

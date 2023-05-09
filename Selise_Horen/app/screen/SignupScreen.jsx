@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,12 +6,28 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+  Button,
+} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as ImagePicker from "expo-image-picker";
 
 const SignupScreen = ({ navigation }) => {
   const [userInfo, setUserInfo] = useState({});
-  const [confPass, setConfPass] = useState('');
+  const [confPass, setConfPass] = useState("");
+
+  const [image, setImage] = useState(null);
+  const pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.uri);
+    }
+  };
 
   function updateInfo(info) {
     setUserInfo((old) => {
@@ -23,7 +39,7 @@ const SignupScreen = ({ navigation }) => {
     if (userInfo.password && confPass === userInfo.password) {
       console.log(userInfo);
     } else {
-      console.log('Did not match');
+      console.log("Did not match");
     }
   }
 
@@ -43,7 +59,8 @@ const SignupScreen = ({ navigation }) => {
           placeholderTextColor="#666666"
           onChangeText={(text) => {
             updateInfo({ name: text });
-          }}></TextInput>
+          }}
+        ></TextInput>
         <TextInput
           keyboardType="email-address"
           autoComplete="email"
@@ -54,7 +71,8 @@ const SignupScreen = ({ navigation }) => {
           placeholderTextColor="#666666"
           onChangeText={(text) => {
             updateInfo({ email: text });
-          }}></TextInput>
+          }}
+        ></TextInput>
         <TextInput
           keyboardType="phone-pad"
           autoComplete="tel"
@@ -63,7 +81,8 @@ const SignupScreen = ({ navigation }) => {
           placeholderTextColor="#666666"
           onChangeText={(text) => {
             updateInfo({ phone: text });
-          }}></TextInput>
+          }}
+        ></TextInput>
         <TextInput
           autoCapitalize="none"
           autoComplete="street-address"
@@ -73,7 +92,8 @@ const SignupScreen = ({ navigation }) => {
           placeholderTextColor="#666666"
           onChangeText={(text) => {
             updateInfo({ address: text });
-          }}></TextInput>
+          }}
+        ></TextInput>
         <TextInput
           secureTextEntry={true}
           autoCapitalize="none"
@@ -84,7 +104,8 @@ const SignupScreen = ({ navigation }) => {
           placeholderTextColor="#666666"
           onChangeText={(text) => {
             updateInfo({ password: text });
-          }}></TextInput>
+          }}
+        ></TextInput>
         <TextInput
           secureTextEntry={true}
           autoCapitalize="none"
@@ -93,10 +114,19 @@ const SignupScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Confirm Password"
           placeholderTextColor="#666666"
-          onChangeText={(text) => setConfPass(text)}></TextInput>
+          onChangeText={(text) => setConfPass(text)}
+        ></TextInput>
+        {/* Add Input image field */}
+        <TouchableOpacity style={styles.button} onPress={pickImage}>
+          <Text style={styles.buttonText}>Select image</Text>
+        </TouchableOpacity>
 
+        {image && (
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+        )}
+        {/* finish  */}
         <TouchableOpacity style={styles.btn} onPress={signup}>
-          <Text style={{ color: 'white' }}>Sign Up</Text>
+          <Text style={{ color: "white" }}>Sign Up</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.loginContainer}>
@@ -112,21 +142,21 @@ const SignupScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#F7CF47',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#F7CF47",
+    justifyContent: "center",
+    alignItems: "center",
   },
   titleContainer: {
     marginBottom: 40,
-    alignItems: 'center',
+    alignItems: "center",
   },
   title: {
     fontSize: 30,
-    fontWeight: 'bold',
-    color: '#000000',
+    fontWeight: "bold",
+    color: "#000000",
   },
   form: {
-    width: '80%',
+    width: "80%",
   },
   input: {
     height: 40,
@@ -134,31 +164,43 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
 
     borderBottomWidth: 0.5,
-    borderBottomColor: '#000000',
+    borderBottomColor: "#000000",
   },
   btn: {
     borderRadius: 200,
     width: 100,
 
     padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
 
-    backgroundColor: '#000000',
+    backgroundColor: "#000000",
   },
 
   loginContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 20,
   },
   loginText: {
-    color: 'black',
+    color: "black",
     marginRight: 5,
   },
   loginLink: {
-    color: 'black',
-    fontWeight: 'bold',
-    textDecorationLine: 'underline',
+    color: "black",
+    fontWeight: "bold",
+    textDecorationLine: "underline",
+  },
+  button: {
+    backgroundColor: "#000000",
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: "#FFF",
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
 export default SignupScreen;
