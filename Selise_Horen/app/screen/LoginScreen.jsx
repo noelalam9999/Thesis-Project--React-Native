@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -12,13 +12,15 @@ const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const passField = useRef();
+
   function showRegister() {
     navigation.navigate('SignUp');
-    console.log(navigation);
   }
 
   async function login() {
     try {
+      await AsyncStorage.setItem('token', 'newToken');
     } catch (error) {
       console.log(error);
     }
@@ -29,18 +31,31 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.form}>
         <TextInput
           keyboardType="email-address"
+          autoCapitalize="none"
+          autoComplete="email"
+          autoCorrect={false}
+          returnKeyType="next"
           style={styles.input}
           placeholder="Email"
+          placeholderTextColor="#666666"
           onChangeText={(text) => {
             setEmail(text);
-          }}></TextInput>
+          }}
+          blurOnSubmit={false}
+          onSubmitEditing={() => passField.current.focus()}></TextInput>
         <TextInput
-          secureTextEntry="true"
+          autoCapitalize="none"
+          autoCorrect={false}
+          returnKeyType="done"
+          secureTextEntry={true}
           style={styles.input}
           placeholder="Password"
+          placeholderTextColor="#666666"
           onChangeText={(text) => {
             setPassword(text);
-          }}></TextInput>
+          }}
+          ref={passField}
+          onSubmitEditing={login}></TextInput>
 
         <View style={styles.center}>
           <TouchableOpacity style={styles.btn} onPress={login}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,23 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignupScreen = ({ navigation }) => {
+  const [userInfo, setUserInfo] = useState({});
+  const [confPass, setConfPass] = useState('');
+
+  function updateInfo(info) {
+    setUserInfo((old) => {
+      return { ...old, ...info };
+    });
+  }
+
+  function signup() {
+    if (userInfo.password && confPass === userInfo.password) {
+      console.log(userInfo)
+    } else {
+      console.log('Did not match');
+    }
+  }
+
   function goBack() {
     navigation.goBack();
   }
@@ -19,25 +36,65 @@ const SignupScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Username"
-          placeholderTextColor="#666666"></TextInput>
+          autoComplete="name"
+          autoCapitalize="words"
+          autoCorrect={false}
+          placeholderTextColor="#666666"
+          onChangeText={(text) => {
+            updateInfo({ name: text });
+          }}></TextInput>
         <TextInput
+          keyboardType="email-address"
+          autoComplete="email"
+          autoCapitalize="none"
+          autoCorrect={false}
           style={styles.input}
           placeholder="Email"
-          placeholderTextColor="#666666"></TextInput>
+          placeholderTextColor="#666666"
+          onChangeText={(text) => {
+            updateInfo({ email: text });
+          }}></TextInput>
         <TextInput
+          keyboardType="phone-pad"
+          autoComplete="tel"
+          style={styles.input}
+          placeholder="Phone Number"
+          placeholderTextColor="#666666"
+          onChangeText={(text) => {
+            updateInfo({ phone: text });
+          }}></TextInput>
+        <TextInput
+          autoCapitalize="none"
+          autoComplete="street-address"
+          autoCorrect={false}
           style={styles.input}
           placeholder="Address"
-          placeholderTextColor="#666666"></TextInput>
+          placeholderTextColor="#666666"
+          onChangeText={(text) => {
+            updateInfo({ address: text });
+          }}></TextInput>
         <TextInput
+          secureTextEntry={true}
+          autoCapitalize="none"
+          autoComplete="password-new"
+          autoCorrect={false}
           style={styles.input}
           placeholder="Password"
-          placeholderTextColor="#666666"></TextInput>
+          placeholderTextColor="#666666"
+          onChangeText={(text) => {
+            updateInfo({ password: text });
+          }}></TextInput>
         <TextInput
+          secureTextEntry={true}
+          autoCapitalize="none"
+          autoComplete="password-new"
+          autoCorrect={false}
           style={styles.input}
           placeholder="Confirm Password"
-          placeholderTextColor="#666666"></TextInput>
+          placeholderTextColor="#666666"
+          onChangeText={(text) => setConfPass(text)}></TextInput>
 
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={signup}>
           <Text style={{ color: 'white' }}>Sign Up</Text>
         </TouchableOpacity>
       </View>
