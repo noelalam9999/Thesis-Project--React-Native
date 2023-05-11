@@ -72,6 +72,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  scrollView: {
+    marginTop: 20,
+  },
   avatarContainer: {
     width: 140,
     height: 140,

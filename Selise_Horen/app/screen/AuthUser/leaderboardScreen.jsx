@@ -132,7 +132,8 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
-              flex: 1,
+
+              marginBottom: 10,
             }}
           >
             <Text style={{ color: "#F7CF47", fontSize: 20 }}>4</Text>
@@ -152,6 +153,7 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
+              marginBottom: 10,
             }}
           >
             <Text style={{ color: "#F7CF47", fontSize: 20 }}>5</Text>
@@ -171,6 +173,7 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
+              marginBottom: 10,
             }}
           >
             <Text style={{ color: "#F7CF47", fontSize: 20 }}> 6</Text>
@@ -190,6 +193,7 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
+              marginBottom: 10,
             }}
           >
             <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
@@ -209,6 +213,7 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
+              marginBottom: 10,
             }}
           >
             <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
@@ -228,6 +233,7 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
+              marginBottom: 10,
             }}
           >
             <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
@@ -247,6 +253,7 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
+              marginBottom: 10,
             }}
           >
             <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
@@ -266,6 +273,7 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
+              marginBottom: 10,
             }}
           >
             <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
@@ -285,6 +293,7 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
+              marginBottom: 10,
             }}
           >
             <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>

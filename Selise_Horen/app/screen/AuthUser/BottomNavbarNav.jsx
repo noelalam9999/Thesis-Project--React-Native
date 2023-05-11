@@ -1,6 +1,6 @@
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import HomeScreen from "./HomeScreen";
-import DeviceScreen from "./DevcieScreen";
+import DeviceList from "./DeviceList";
 import LeaderboardScreen from "./leaderboardScreen";
 import { MaterialIcons } from "@expo/vector-icons";
 //import Icon from "react-native-vector-icons/FontAwesome";
@@ -32,19 +32,6 @@ export default TabNavigator = () => {
         barStyle={{ backgroundColor: "black" }}
       >
         <Tab.Screen
-          name="Devices"
-          component={DeviceScreen}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <Icon
-                name="hardware-chip-outline"
-                size={28}
-                color={focused ? "black" : "#F7CF47"}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
           name="Home"
           component={HomeScreen}
           options={{
@@ -57,6 +44,20 @@ export default TabNavigator = () => {
             ),
           }}
         />
+        <Tab.Screen
+          name="Devices"
+          component={DeviceList}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Icon
+                name="hardware-chip-outline"
+                size={28}
+                color={focused ? "black" : "#F7CF47"}
+              />
+            ),
+          }}
+        />
+
         <Tab.Screen
           name="Leaderboard"
           component={LeaderboardScreen}
