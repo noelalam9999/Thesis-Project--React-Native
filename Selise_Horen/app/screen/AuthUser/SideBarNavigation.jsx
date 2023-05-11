@@ -107,7 +107,7 @@ const AppNavigator = () => {
               color: "#F7CF47",
             },
           }}
-          component={ProfileScreen}
+          component={PurchaseDevice}
         />
       </Drawer.Navigator>
     </NavigationContainer>

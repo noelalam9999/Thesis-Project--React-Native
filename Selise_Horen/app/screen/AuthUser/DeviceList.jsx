@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Modal from "react-native-modal";
 import { MaterialIcons } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/FontAwesome";
 const vehicles = [
   {
     id: 1,
@@ -29,55 +30,104 @@ const vehicles = [
 
     Ru_id: "123456",
     qr_code: "abcd1234",
-    name: "Ford",
+
     device_configure: "configured",
+    name: "Ford",
   },
   {
     id: 4,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Chevrolet",
   },
   {
     id: 5,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Tesla",
   },
   {
     id: 6,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Nissan",
   },
   {
     id: 7,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Mazda",
   },
   {
     id: 8,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Subaru",
   },
   {
     id: 9,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Jeep",
   },
   {
     id: 10,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Audi",
   },
   {
     id: 11,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "BMW",
   },
   {
     id: 12,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Mercedes-Benz",
   },
   {
     id: 13,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Volkswagen",
   },
   {
     id: 14,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Ferrari",
   },
   {
     id: 15,
+    Ru_id: "123456",
+    qr_code: "abcd1234",
+
+    device_configure: "configured",
     name: "Lamborghini",
   },
 ];
@@ -107,7 +157,7 @@ const DeviceList = () => {
           <TextInput>Search Device</TextInput>
         </TouchableOpacity>
         <TouchableOpacity style={styles.claimedButton}>
-          <Text style={styles.claimedText}>Claimed Device</Text>
+          <Text style={styles.claimedText}>Claim Device</Text>
         </TouchableOpacity>
       </View>
       <ScrollView style={styles.scrollView}>
@@ -119,6 +169,18 @@ const DeviceList = () => {
               onPress={() => handleVehiclePress(vehicle)}
             >
               <Text style={styles.name}>{vehicle.name}</Text>
+              <View style={styles.infoContainer}>
+                <Text style={styles.infoText}>
+                  <Icon name="bullhorn" size={20} color="#000000" /> : 30
+                </Text>
+                <Text style={styles.infoText}>
+                  <MaterialIcons name="drive-eta" size={20} color={"#000000"} />
+                  : 15Km{" "}
+                </Text>
+                <Text style={styles.infoText}>
+                  <Icon name="hourglass-2" size={20} color="#000000" /> : 4 Hour{" "}
+                </Text>
+              </View>
             </TouchableOpacity>
           ))}
         </View>
@@ -128,9 +190,9 @@ const DeviceList = () => {
           <Text style={styles.modalText}>
             {selectedVehicle ? selectedVehicle.name : ""}
           </Text>
-          <Text>{vehicles.Ru_id}</Text>
-          <Text>{vehicles.qr_code}</Text>
-          <Text>{vehicles.device_configure}</Text>
+
+          {/* <Text>{selectedVehicle.qr_code}</Text>
+          <Text>{selectedVehicle.device_configure}</Text> */}
 
           <TouchableOpacity
             style={styles.closeButton}
@@ -185,22 +247,50 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   vehicle: {
-    borderRadius: 20,
     backgroundColor: "#F7CF47",
+    borderWidth: 1,
+    borderColor: "#C5A538",
+    borderRadius: 10,
+    height: "6%",
+    marginBottom: 7,
     padding: 12,
-    marginBottom: 20,
-    borderWidth: 1.5,
-    borderColor: "black",
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.27,
+    // shadowRadius: 2.62,
+
+    //elevation: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   name: {
     color: "#000000",
-
-    fontSize: 15,
+    fontSize: 18,
+    fontWeight: "bold",
+    flex: 1,
+    textAlign: "left",
+    marginRight: 70,
   },
+  infoContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  infoText: {
+    marginLeft: 10,
+    fontSize: 12,
+    color: "#000000",
+    textAlign: "right",
+  },
+
   modalContainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ffffff",
+    backgroundColor: "#000000",
     borderRadius: 10,
     width: "80%",
     height: "50%",
@@ -208,6 +298,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   modalText: {
+    color: "#F7CF47",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
