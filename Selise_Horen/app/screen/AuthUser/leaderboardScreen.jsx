@@ -11,7 +11,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import coin from "../../../assets/image/coin3.png";
 import sport5 from "../../../assets/image/sport5.png";
 import noel_bhai_modified from "../../../assets/image/noel_bhai_modified.png";
-// import samiya_apu from "../../../assets/image/.png";
 
 const LeaderboardScreen = () => {
   const [isTodaySelected, setIsTodaySelected] = useState(true);

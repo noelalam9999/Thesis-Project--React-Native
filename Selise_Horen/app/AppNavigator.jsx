@@ -30,11 +30,11 @@ const App = () => {
 
   return (
     <>
-      {!loggedIn ? (
+      {/* {!loggedIn ? (
         <LoginSignUpNav></LoginSignUpNav>
-      ) : (
-        <AppNavigator></AppNavigator>
-      )}
+      ) : ( */}
+      <AppNavigator></AppNavigator>
+      {/* )} */}
     </>
   );
 };

@@ -1,40 +1,79 @@
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import HomeScreen from './HomeScreen';
-import LeaderboardScreen from './leaderboardScreen';
-import { MaterialIcons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import HomeScreen from "./HomeScreen";
+import DeviceScreen from "./DevcieScreen";
+import LeaderboardScreen from "./leaderboardScreen";
+import { MaterialIcons } from "@expo/vector-icons";
+//import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Ionicons";
+
+import {
+  DefaultTheme,
+  Provider as PaperProvider,
+  useTheme,
+} from "react-native-paper";
 
 const Tab = createMaterialBottomTabNavigator();
+const MyTheme = {
+  colors: {
+    secondaryContainer: "#F7CF47",
+  },
+};
 
 export default TabNavigator = () => {
+  const theme = useTheme();
+
   return (
-    <Tab.Navigator
-      barStyle={{ backgroundColor: 'black' }}
-      tabBarOptions={{
-        activeTintColor: 'white',
-      }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: () => <Icon name="home" size={24} color="#F7CF47" />,
-          tabBarLabelStyle: {
-            color: 'white',
-          },
+    <PaperProvider theme={MyTheme}>
+      <Tab.Navigator
+        labeled={false}
+        tabBarOptipns={{
+          showLabel: false,
         }}
-      />
-      <Tab.Screen
-        name="Leaderboard"
-        component={LeaderboardScreen}
-        options={{
-          tabBarIcon: () => (
-            <MaterialIcons name="leaderboard" size={24} color="#F7CF47" />
-          ),
-          tabBarLabelStyle: {
-            fontWeight: 'bold',
-          },
-        }}
-      />
-    </Tab.Navigator>
+        barStyle={{ backgroundColor: "black" }}
+      >
+        <Tab.Screen
+          name="Devices"
+          component={DeviceScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Icon
+                name="hardware-chip-outline"
+                size={28}
+                color={focused ? "black" : "#F7CF47"}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <Icon
+                name="home"
+                size={24}
+                color={focused ? "black" : "#F7CF47"}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Leaderboard"
+          component={LeaderboardScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <MaterialIcons
+                name="leaderboard"
+                size={24}
+                color={focused ? "black" : "#F7CF47"}
+              />
+            ),
+            // tabBarLabelStyle: {
+            //   fontWeight: "bold",
+            // },
+          }}
+        />
+      </Tab.Navigator>
+    </PaperProvider>
   );
 };
