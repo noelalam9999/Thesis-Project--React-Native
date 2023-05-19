@@ -11,12 +11,22 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as ImagePicker from "expo-image-picker";
+import AuthService from "../services/Auth.service";
+import { set } from "react-native-reanimated";
+import LoginScreen from "./LoginScreen";
+import { CloudinaryImage } from "@cloudinary/url-gen";
 
-const SignupScreen = ({ navigation }) => {
-  const [userInfo, setUserInfo] = useState({});
-  const [confPass, setConfPass] = useState("");
+const SignupScreen = ({ navigation, route }) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [image, setImage] = useState(null);
+  const { isLoggedIn } = route.params;
+
+  //const [confPass, setConfPass] = useState("");
+  const [image, setImage] = useState("");
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -30,23 +40,28 @@ const SignupScreen = ({ navigation }) => {
     }
   };
 
-  function updateInfo(info) {
-    setUserInfo((old) => {
-      return { ...old, ...info };
-    });
-  }
-
-  function signup() {
-    if (userInfo.password && confPass === userInfo.password) {
-      console.log(userInfo);
-    } else {
-      console.log("Did not match");
+  const handleSubmit = async () => {
+    try {
+      const image = await CloudinaryImage.uploader.upload(image);
+      const imageurl = image.secure_url;
+      const userInfo = {
+        name: name,
+        email: email,
+        phone: phone,
+        address: address,
+        password: password,
+        profilePic: imageurl,
+      };
+      const response = await AuthService.register(userInfo);
+      if (response) {
+        console.log("signup successful");
+        isLoggedIn(true);
+      }
+    } catch (error) {
+      console.log("could not sign up");
     }
-  }
+  };
 
-  function goBack() {
-    navigation.goBack();
-  }
   return (
     <View style={styles.screen}>
       <Text>LOGO</Text>
@@ -58,9 +73,8 @@ const SignupScreen = ({ navigation }) => {
           autoCapitalize="words"
           autoCorrect={false}
           placeholderTextColor="#666666"
-          onChangeText={(text) => {
-            updateInfo({ name: text });
-          }}
+          value={name}
+          onChangeText={setName}
         ></TextInput>
         <TextInput
           keyboardType="email-address"
@@ -70,9 +84,8 @@ const SignupScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Email"
           placeholderTextColor="#666666"
-          onChangeText={(text) => {
-            updateInfo({ email: text });
-          }}
+          value={email}
+          onChangeText={setEmail}
         ></TextInput>
         <TextInput
           keyboardType="phone-pad"
@@ -80,9 +93,8 @@ const SignupScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Phone Number"
           placeholderTextColor="#666666"
-          onChangeText={(text) => {
-            updateInfo({ phone: text });
-          }}
+          value={phone}
+          onChangeText={setPhone}
         ></TextInput>
         <TextInput
           autoCapitalize="none"
@@ -91,9 +103,8 @@ const SignupScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Address"
           placeholderTextColor="#666666"
-          onChangeText={(text) => {
-            updateInfo({ address: text });
-          }}
+          value={address}
+          onChangeText={setAddress}
         ></TextInput>
         <TextInput
           secureTextEntry={true}
@@ -103,11 +114,10 @@ const SignupScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#666666"
-          onChangeText={(text) => {
-            updateInfo({ password: text });
-          }}
+          value={password}
+          onChangeText={setPassword}
         ></TextInput>
-        <TextInput
+        {/* <TextInput
           secureTextEntry={true}
           autoCapitalize="none"
           autoComplete="password-new"
@@ -116,17 +126,19 @@ const SignupScreen = ({ navigation }) => {
           placeholder="Confirm Password"
           placeholderTextColor="#666666"
           onChangeText={(text) => setConfPass(text)}
-        ></TextInput>
+        ></TextInput> */}
         {/* Add Input image field */}
         <TouchableOpacity style={styles.button} onPress={pickImage}>
-          <Text style={styles.buttonText}>Select image</Text>
+          <Text style={styles.buttonText} value={image} onChangeText={setImage}>
+            Select image
+          </Text>
         </TouchableOpacity>
 
         {image && (
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
         )}
         {/* finish  */}
-        <TouchableOpacity style={styles.btn} onPress={signup}>
+        <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
           <Text style={{ color: "white" }}>Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.googleButton}>
@@ -138,7 +150,10 @@ const SignupScreen = ({ navigation }) => {
       </View>
       <View style={styles.loginContainer}>
         <Text style={styles.loginText}>Already have an account?</Text>
-        <Text style={styles.loginLink} onPress={goBack}>
+        <Text
+          style={styles.loginLink}
+          onPress={() => navigation.navigate("Login")}
+        >
           Log in
         </Text>
       </View>

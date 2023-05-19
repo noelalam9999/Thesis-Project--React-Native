@@ -8,24 +8,33 @@ import {
   TouchableOpacity,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AuthService from "../services/Auth.service";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const passField = useRef();
 
   function showRegister() {
     navigation.navigate("SignUp");
   }
+  const { isLoggedIn } = route.params;
 
-  async function login() {
+  const handleSubmit = async () => {
     try {
-      await AsyncStorage.setItem("token", "newToken");
+      const user = { email: email, password: password };
+      const response = await AuthService.login(user);
+      if (response) {
+        console.log(response);
+        await AsyncStorage.setItem("token", response.accessToken);
+        console.log("login successful");
+        isLoggedIn(true);
+      } else {
+        console.log("Email or password is incorrect");
+      }
     } catch (error) {
-      console.log(error);
+      console.log("Error occurred during login:", error);
     }
-  }
+  };
   return (
     <View style={styles.screen}>
       <Text>LOGO</Text>
@@ -39,11 +48,8 @@ const LoginScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Email"
           placeholderTextColor="#666666"
-          onChangeText={(text) => {
-            setEmail(text);
-          }}
-          blurOnSubmit={false}
-          onSubmitEditing={() => passField.current.focus()}
+          value={email}
+          onChangeText={setEmail}
         ></TextInput>
         <TextInput
           autoCapitalize="none"
@@ -53,15 +59,12 @@ const LoginScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#666666"
-          onChangeText={(text) => {
-            setPassword(text);
-          }}
-          ref={passField}
-          onSubmitEditing={login}
+          value={password}
+          onChangeText={setPassword}
         ></TextInput>
 
         <View style={styles.center}>
-          <TouchableOpacity style={styles.btn} onPress={login}>
+          <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
             <Text style={{ color: "white" }}>Log In</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn} onPress={showRegister}>

@@ -1,62 +1,135 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import AuthService from "../../services/Auth.service";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BarChart } from "react-native-chart-kit";
+import { Dimensions } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import Medal from "../../../assets/image/medal.png";
+
+const BarchartData = [
+  { x: 5, y: 0 },
+  { x: 10, y: 1 },
+  { x: 15, y: 2 },
+  { x: 20, y: 3 },
+  { x: 25, y: 4 },
+  { x: 30, y: 5 },
+  { x: 35, y: 6 },
+  { x: 40, y: 7 },
+  { x: 45, y: 8 },
+];
 
 const ProfileScreen = () => {
+  const [accessToken, setAccessToken] = useState("");
+
+  useEffect(() => {
+    retrieveAccessToken();
+  }, []);
+
+  const retrieveAccessToken = async () => {
+    try {
+      const token = await AsyncStorage.getItem("accessToken");
+      if (token) {
+        setAccessToken(token);
+      }
+    } catch (error) {
+      console.log("Error retrieving access token:", error);
+    }
+  };
+  const handleLogout = () => {
+    AuthService.logout(accessToken);
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.body}>
-        <View style={styles.avatarContainer}>
-          <Text style={styles.avatar}>EK</Text>
+      <ScrollView>
+        <View style={styles.body}>
+          <View style={styles.avatarContainer}>
+            <Text style={styles.avatar}>EK</Text>
+          </View>
+          <View style={styles.nameContainer}>
+            <Text style={styles.name}>Ershad Khan</Text>
+            <Text style={styles.infoText}> Individual account</Text>
+          </View>
+
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity style={styles.button}>
+              <View>
+                <Text style={styles.number}>10</Text>
+                <Text style={styles.label}>Devices </Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.button}>
+              <View>
+                <Text style={styles.number}>5</Text>
+                <Text style={styles.label}>Ordered</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+              <View>
+                <Text style={styles.number}>3</Text>
+                <Text style={styles.label}>Active</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.nameContainer}>
-          <Text style={styles.name}>Ershad Khan</Text>
-          <Text style={styles.infoText}> Individual account</Text>
+        <View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: 40,
+              marginLeft: 60,
+            }}
+          >
+            <Image source={Medal} style={{ width: 25, height: 30 }} />
+            <Text style={{ fontSize: 15, marginLeft: 5 }}>
+              Number of Badge Collections
+            </Text>
+          </View>
+          <BarChart
+            data={{
+              labels: BarchartData.map((dataPoint) => dataPoint.x.toString()),
+              datasets: [
+                { data: BarchartData.map((dataPoint) => dataPoint.y) },
+              ],
+            }}
+            width={Dimensions.get("window").width}
+            height={220}
+            yAxisSuffix=""
+            yAxisInterval={1}
+            chartConfig={{
+              backgroundColor: "#F7CF47",
+              backgroundGradientFrom: "#F7CF47",
+              backgroundGradientTo: "#F7CF47",
+              decimalPlaces: 0,
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            }}
+            style={{
+              marginVertical: 8,
+              borderRadius: 16,
+              marginTop: 20,
+              marginLeft: -45,
+              marginRight: 10,
+            }}
+          />
         </View>
 
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.button}>
-            <View>
-              <Text style={styles.number}>10</Text>
-              <Text style={styles.label}>Registered </Text>
-            </View>
+        <View style={styles.bottomButton}>
+          <TouchableOpacity style={styles.editButton}>
+            <MaterialIcons name="edit" size={24} color="#000" />
+            <Text style={{ color: "#000" }}>Edit Profile</Text>
           </TouchableOpacity>
-
-          <TouchableOpacity style={styles.button}>
-            <View>
-              <Text style={styles.number}>5</Text>
-              <Text style={styles.label}>Active</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <View>
-              <Text style={styles.number}>54</Text>
-              <Text style={styles.label}>Today's horn</Text>
-            </View>
+          <TouchableOpacity style={styles.editButton}>
+            <MaterialIcons name="logout" size={24} color="#000" />
+            <Text style={{ color: "#000" }}>Signout</Text>
           </TouchableOpacity>
         </View>
-      </View>
-
-      <View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoLabel}>Email:</Text>
-          <Text style={styles.infoText}>your@email.com</Text>
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoLabel}>Address:</Text>
-          <Text style={styles.infoText}>104,Project Code</Text>
-        </View>
-        <View style={styles.infoContainer}>
-          <Text style={styles.infoLabel}>Phone:</Text>
-          <Text style={styles.infoText}>01323249</Text>
-        </View>
-      </View>
-      <TouchableOpacity style={styles.logoutButton}>
-        <View style={styles.logoutContainer}>
-          <MaterialIcons name="logout" size={24} color={"#F7CF47"} />
-        </View>
-      </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
@@ -144,23 +217,36 @@ const styles = StyleSheet.create({
   button: {
     width: "30%",
     backgroundColor: "#000000",
-    borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    marginHorizontal: 5,
+    borderRadius: 30,
+    paddingVertical: 2,
+    paddingHorizontal: 2,
+    marginHorizontal: 2,
   },
-  logoutButton: {
-    marginTop: 50,
-    alignSelf: "center",
-    padding: 10,
-    backgroundColor: "#000000",
-    borderRadius: 5,
-    elevation: 2,
-  },
-
-  logoutContainer: {
+  bottomButton: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 5,
+    marginTop: 120,
+    marginBottom: 40,
+  },
+  editButton: {
+    flexDirection: "row",
+    backgroundColor: "#F7CF47",
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "#F7CF47",
+    marginLeft: 5,
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 7,
   },
 });
 

@@ -6,27 +6,19 @@ import LoginSignUpNav from "./screen/LoginSignUpNav";
 import { View } from "react-native";
 
 const App = () => {
-  // try {
-  //   const ii = await AsyncStorage.setItem('hello', 'world');
-  //   console.log(ii);
+  // const [loggedIn, setLoggedIn] = useState(false);
 
-  // } catch (error) {
-  //   console.log(error);
-  // }
-
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const checkLoggedIn = async () => {
-      try {
-        const token = await AsyncStorage.getItem("token");
-        if (token) setLoggedIn(true);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    checkLoggedIn();
-  }, []);
+  // useEffect(() => {
+  //   const checkLoggedIn = async () => {
+  //     try {
+  //       const token = await AsyncStorage.getItem("token");
+  //       if (token) setLoggedIn(true);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   checkLoggedIn();
+  // }, []);
 
   return (
     <>

@@ -1,0 +1,222 @@
+[
+  {
+    "name": "Banani",
+    "latitude": 23.7939,
+    "longitude": 90.4043
+  },
+  {
+    "name": "Baridhara",
+    "latitude": 23.8056,
+    "longitude": 90.4115
+  },
+  {
+    "name": "Bashundhara",
+    "latitude": 23.8128,
+    "longitude": 90.4284
+  },
+  {
+    "name": "Dhanmondi",
+    "latitude": 23.7465,
+    "longitude": 90.376
+  },
+  {
+    "name": "Gulshan",
+    "latitude": 23.7925,
+    "longitude": 90.4078
+  },
+  {
+    "name": "Jatrabari",
+    "latitude": 23.7104,
+    "longitude": 90.4317
+  },
+  {
+    "name": "Kamalapur",
+    "latitude": 23.7297,
+    "longitude": 90.4178
+  },
+  {
+    "name": "Keraniganj",
+    "latitude": 23.7236,
+    "longitude": 90.3961
+  },
+  {
+    "name": "Khilgaon",
+    "latitude": 23.747,
+    "longitude": 90.4317
+  },
+  {
+    "name": "Khilkhet",
+    "latitude": 23.8391,
+    "longitude": 90.4173
+  },
+  {
+    "name": "Lalbagh",
+    "latitude": 23.716,
+    "longitude": 90.3854
+  },
+  {
+    "name": "Malibagh",
+    "latitude": 23.7517,
+    "longitude": 90.4056
+  },
+  {
+    "name": "Mirpur",
+    "latitude": 23.8223,
+    "longitude": 90.3654
+  },
+  {
+    "name": "Mohammadpur",
+    "latitude": 23.7574,
+    "longitude": 90.361
+  },
+  {
+    "name": "Motijheel",
+    "latitude": 23.7314,
+    "longitude": 90.4162
+  },
+  {
+    "name": "Nakhalpara",
+    "latitude": 23.7771,
+    "longitude": 90.4061
+  },
+  {
+    "name": "Narayanganj",
+    "latitude": 23.6236,
+    "longitude": 90.5015
+  },
+  {
+    "name": "New Market",
+    "latitude": 23.7293,
+    "longitude": 90.3975
+  },
+  {
+    "name": "Nikunja",
+    "latitude": 23.8508,
+    "longitude": 90.4215
+  },
+  {
+    "name": "Pallabi",
+    "latitude": 23.8443,
+    "longitude": 90.3601
+  },
+  {
+    "name": "Paltan",
+    "latitude": 23.7318,
+    "longitude": 90.4134
+  },
+  {
+    "name": "Ramna",
+    "latitude": 23.7408,
+    "longitude": 90.3963
+  },
+  {
+    "name": "Dhaka",
+    "latitude": 23.8103,
+    "longitude": 90.4125
+  },
+  {
+    "name": "Chittagong",
+    "latitude": 22.3355,
+    "longitude": 91.8341
+  },
+  {
+    "name": "Sylhet",
+    "latitude": 24.8898,
+    "longitude": 91.8698
+  },
+  {
+    "name": "Rajshahi",
+    "latitude": 24.3636,
+    "longitude": 88.6241
+  },
+  {
+    "name": "Khulna",
+    "latitude": 22.8456,
+    "longitude": 89.5403
+  },
+  {
+    "name": "Barisal",
+    "latitude": 22.701,
+    "longitude": 90.3535
+  },
+  {
+    "name": "Cox's Bazar",
+    "latitude": 21.4272,
+    "longitude": 92.0058
+  },
+  {
+    "name": "Narayanganj",
+    "latitude": 23.6236,
+    "longitude": 90.5015
+  },
+  {
+    "name": "Comilla",
+    "latitude": 23.4684,
+    "longitude": 91.1783
+  },
+  {
+    "name": "Jessore",
+    "latitude": 23.1646,
+    "longitude": 89.2182
+  },
+  {
+    "name": "Dinajpur",
+    "latitude": 25.6253,
+    "longitude": 88.6354
+  },
+  {
+    "name": "Savar",
+    "latitude": 23.8584,
+    "longitude": 90.2666
+  },
+  {
+    "name": "Tangail",
+    "latitude": 24.2498,
+    "longitude": 89.9167
+  },
+  {
+    "name": "Mymensingh",
+    "latitude": 24.7471,
+    "longitude": 90.4203
+  },
+  {
+    "name": "Nawabganj",
+    "latitude": 24.5965,
+    "longitude": 88.2778
+  },
+  {
+    "name": "Faridpur",
+    "latitude": 23.6071,
+    "longitude": 89.8429
+  },
+  {
+    "name": "Bogra",
+    "latitude": 24.847,
+    "longitude": 89.3739
+  },
+  {
+    "name": "Rangpur",
+    "latitude": 25.752,
+    "longitude": 89.2438
+  },
+  {
+    "name": "Narsingdi",
+    "latitude": 23.9302,
+    "longitude": 90.7189
+  },
+  {
+    "name": "Gazipur",
+    "latitude": 24.0023,
+    "longitude": 90.4267
+  },
+  {
+    "name": "Moulvibazar",
+    "latitude": 24.4837,
+    "longitude": 91.7774
+  },
+  {
+    "name": "Bhola",
+    "latitude": 22.6859,
+    "longitude": 90.648
+  }
+]

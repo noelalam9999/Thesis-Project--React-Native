@@ -173,10 +173,10 @@ const DeviceList = () => {
                 <Text style={styles.infoText}>
                   <Icon name="bullhorn" size={20} color="#000000" /> : 30
                 </Text>
-                <Text style={styles.infoText}>
+                {/* <Text style={styles.infoText}>
                   <MaterialIcons name="drive-eta" size={20} color={"#000000"} />
                   : 15Km{" "}
-                </Text>
+                </Text> */}
                 <Text style={styles.infoText}>
                   <Icon name="hourglass-2" size={20} color="#000000" /> : 4 Hour{" "}
                 </Text>
@@ -254,15 +254,7 @@ const styles = StyleSheet.create({
     height: "6%",
     marginBottom: 7,
     padding: 12,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.27,
-    // shadowRadius: 2.62,
 
-    //elevation: 8,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

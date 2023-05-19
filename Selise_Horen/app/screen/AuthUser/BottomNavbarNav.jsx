@@ -3,7 +3,7 @@ import HomeScreen from "./HomeScreen";
 import DeviceList from "./DeviceList";
 import LeaderboardScreen from "./leaderboardScreen";
 import { MaterialIcons } from "@expo/vector-icons";
-//import Icon from "react-native-vector-icons/FontAwesome";
+
 import Icon from "react-native-vector-icons/Ionicons";
 
 import {
@@ -50,7 +50,7 @@ export default TabNavigator = () => {
           options={{
             tabBarIcon: ({ focused }) => (
               <Icon
-                name="hardware-chip-outline"
+                name="ios-bar-chart-outline"
                 size={28}
                 color={focused ? "black" : "#F7CF47"}
               />

@@ -5,20 +5,27 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  Image,
 } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
-
+import { VictoryScatter, VictoryChart } from "victory-native";
+import badge from "../../../assets/image/black-badge.png";
+import noise from "../../../assets/image/noise.png";
+import pollution from "../../../assets/image/noise-pollution.png";
+import road from "../../../assets/image/road.png";
+import hour from "../../../assets/image/24-hours.png";
+import { ECharts } from "react-native-echarts-wrapper";
 const chartData1 = [
   { x: 1, y: 50 },
-  { x: 5, y: 60 },
+  { x: 5, y: 30 },
   { x: 10, y: 70 },
-  { x: 15, y: 80 },
-  { x: 20, y: 90 },
-  { x: 25, y: 100 },
+  { x: 15, y: 20 },
+  { x: 20, y: 80 },
+  { x: 25, y: 87 },
 ];
-const countries = [
+const Devices = [
   "Device Change",
   "Toyota Camry",
   "Honda Civic",
@@ -27,6 +34,17 @@ const countries = [
   "BMW M3",
   "Audi A4",
 ];
+
+const data = new Array(200).fill(0).reduce(
+  (prev, curr) => [
+    ...prev,
+    {
+      x: Math.random() * 35,
+      y: Math.random() * 35,
+    },
+  ],
+  []
+);
 
 const chartData3 = [];
 for (let x = -30; x <= 30; x++) {
@@ -52,118 +70,202 @@ const HomeScreen = () => {
     setIsYearView(true);
     setIsMonthView(false);
   };
+  const progress = 0.5;
+  const level = Math.ceil(progress * 10);
+  const option = {
+    xAxis: {
+      type: "category",
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    },
+    yAxis: {
+      type: "value",
+    },
+    series: [
+      {
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: "line",
+      },
+    ],
+  };
+
   return (
     <View style={styles.background}>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ fontWeight: "bold" }}>
-          Number of Horns played per day
+      <ScrollView>
+        <View style={styles.imageContainer}>
+          <Image source={badge} style={styles.badgeImage} />
+          <Text style={styles.title}>Frequent Honker</Text>
+        </View>
+        <View style={styles.progressBarContainer}>
+          {[...Array(10)].map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.level,
+                index < level ? styles.activeLevel : styles.inactiveLevel,
+              ]}
+            />
+          ))}
+        </View>
+        <Text style={styles.levelText}>
+          Maintain 4 horns to move to the next level
         </Text>
-      </View>
-      <View style={styles.container}>
-        <TouchableOpacity style={[styles.button]} onPress={handlePress}>
-          <Text
-            style={[
-              styles.buttonText,
-              isYearView ? styles.activeButtonText : null,
-            ]}
+        <View style={styles.wrapContainer}>
+          <View style={styles.boxContainer}>
+            <View style={styles.box}>
+              <Image
+                source={pollution}
+                style={{ width: 30, height: 30 }}
+              ></Image>
+              <Text style={styles.boxText}>
+                You are in top 5% of sound polluter
+              </Text>
+            </View>
+            <View style={styles.box}>
+              <Image source={noise} style={{ width: 30, height: 30 }}></Image>
+              <Text style={styles.boxText}>
+                Today you were exposed to 10 decibel
+              </Text>
+            </View>
+          </View>
+          <View style={styles.boxContainer}>
+            <View style={styles.box}>
+              <Image source={road} style={{ width: 30, height: 30 }}></Image>
+              <Text style={styles.boxText}>0.31% Horn per Km</Text>
+            </View>
+            <View style={styles.box}>
+              <Image source={hour} style={{ width: 30, height: 30 }}></Image>
+              <Text style={styles.boxText}>0.45% horn per 2 hour</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.containerWrapper}>
+          <View style={styles.container}>
+            <TouchableOpacity style={styles.button} onPress={handlePress}>
+              <Text
+                style={[
+                  styles.buttonText,
+                  isYearView ? styles.activeButtonText : null,
+                ]}
+              >
+                {isYearView && "Year View"}
+                {isMonthView && "Month View"}
+                {!isYearView && !isMonthView && "Week View"}
+              </Text>
+            </TouchableOpacity>
+
+            <SelectDropdown
+              data={Devices}
+              onSelect={(selectedItem, index) => {
+                console.log(selectedItem, index);
+              }}
+              buttonStyle={styles.dropdownButton}
+              buttonTextStyle={styles.dropdownButtonText}
+              dropdownStyle={styles.dropdown}
+              dropdownTextStyle={styles.dropdownText}
+              defaultButtonText="Device change"
+            />
+          </View>
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            {isYearView && "Year View"}
-            {isMonthView && "Month View"}
-            {!isYearView && !isMonthView && "Week View"}
-          </Text>
-        </TouchableOpacity>
+            <Text style={{ fontSize: 15 }}>Number of Horns played per day</Text>
+          </View>
+          {/* <LineChart
+            data={{
+              labels: chartData1.map((dataPoint) => dataPoint.x),
+              datasets: [
+                {
+                  data: chartData1.map((dataPoint) => dataPoint.y),
+                },
+              ],
+            }}
+            width={Dimensions.get("window").width}
+            height={220}
+            yAxisSuffix="%"
+            yAxisInterval={1}
+            chartConfig={{
+              backgroundColor: "#F7CF47",
+              backgroundGradientFrom: "#F7CF47",
+              backgroundGradientTo: "#F7CF47",
+              decimalPlaces: 2,
 
-        <SelectDropdown
-          data={countries}
-          onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index);
-          }}
-          buttonStyle={styles.dropdownButton}
-          buttonTextStyle={styles.dropdownButtonText}
-          dropdownStyle={styles.dropdown}
-          dropdownTextStyle={styles.dropdownText}
-          defaultButtonText="Device change"
-        />
-      </View>
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+            }}
+            bezier
+            style={{
+              marginVertical: 8,
+              borderRadius: 16,
+              marginTop: 20,
+              marginLeft: 8,
+              marginRight: 30,
+            }}
+          /> */}
+          <ECharts option={option} />
+        </View>
+        <View style={styles.containerWrapper}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ fontSize: 15 }}>Global Ranking</Text>
+          </View>
+          <LineChart
+            data={{
+              labels: chartData3
+                .map((dataPoint) => dataPoint.x)
+                .filter((x, index) => index % 10 === 0),
+              datasets: [
+                {
+                  data: chartData3.map((dataPoint) => dataPoint.y),
+                },
+              ],
+            }}
+            width={Dimensions.get("window").width}
+            height={220}
+            yAxisSuffix="%"
+            yAxisInterval={10}
+            chartConfig={{
+              backgroundColor: "#F7CF47",
+              backgroundGradientFrom: "#F7CF47",
+              backgroundGradientTo: "#F7CF47",
+              decimalPlaces: 2,
+              xAxisLabel: "Time",
+              yAxisLabel: "Decibel",
 
-      <LineChart
-        data={{
-          labels: chartData1.map((dataPoint) => dataPoint.x),
-          datasets: [
-            {
-              data: chartData1.map((dataPoint) => dataPoint.y),
-            },
-          ],
-        }}
-        width={Dimensions.get("window").width}
-        height={220}
-        yAxisSuffix="%"
-        yAxisInterval={1}
-        chartConfig={{
-          backgroundColor: "#F7CF47",
-          backgroundGradientFrom: "#F7CF47",
-          backgroundGradientTo: "#F7CF47",
-          decimalPlaces: 2,
-          xAxisLabel: "Time",
-          yAxisLabel: "Decibel",
-
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
-        }}
-        bezier
-        style={{
-          marginVertical: 8,
-          borderRadius: 16,
-          marginTop: 20,
-          marginLeft: 13,
-          marginRight: 26,
-        }}
-      />
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ fontWeight: "bold" }}>Global Ranking</Text>
-      </View>
-
-      <LineChart
-        data={{
-          labels: chartData3
-            .map((dataPoint) => dataPoint.x)
-            .filter((x, index) => index % 10 === 0),
-          datasets: [
-            {
-              data: chartData3.map((dataPoint) => dataPoint.y),
-            },
-          ],
-        }}
-        width={Dimensions.get("window").width}
-        height={220}
-        yAxisSuffix="%"
-        yAxisInterval={10}
-        chartConfig={{
-          backgroundColor: "#F7CF47",
-          backgroundGradientFrom: "#F7CF47",
-          backgroundGradientTo: "#F7CF47",
-          decimalPlaces: 2,
-          xAxisLabel: "Time",
-          yAxisLabel: "Decibel",
-
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16,
-          },
-        }}
-        bezier
-        style={{
-          marginVertical: 8,
-          borderRadius: 16,
-          marginTop: 20,
-          marginLeft: 13,
-          marginRight: 26,
-        }}
-      />
+              color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+              style: {
+                borderRadius: 16,
+              },
+            }}
+            bezier
+            style={{
+              marginVertical: 8,
+              borderRadius: 16,
+              marginTop: 20,
+              marginLeft: 3,
+              marginRight: 26,
+            }}
+          />
+        </View>
+        <View style={styles.containerWrapper}>
+          <View style={{ marginLeft: 13 }}>
+            <VictoryChart domain={{ x: [0, 35], y: [0, 35] }}>
+              <VictoryScatter
+                data={data}
+                size={4}
+                style={{ data: { fill: "black" } }}
+              />
+            </VictoryChart>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -187,20 +289,26 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#000000",
+    width: "30%",
     paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderRadius: 20,
+    paddingHorizontal: 5,
+    borderRadius: 30,
     borderWidth: 1,
     borderColor: "#000000",
     marginTop: 20,
-    marginLeft: 30,
+    marginLeft: 5,
     marginRight: 40,
   },
   dropdownButton: {
+    paddingVertical: 2,
     backgroundColor: "#000000",
     borderRadius: 30,
-    // width: "45%",
-    width: 160,
+    borderWidth: 1,
+    borderColor: "#000000",
+    marginTop: 20,
+    width: "40%",
+    // marginLeft: 20,
+    // marginRight: 40,
   },
   dropdownButtonText: {
     color: "#F7CF47",
@@ -212,7 +320,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#F7CF47",
-    fontWeight: "bold",
+    // fontWeight: "bold",
     textAlign: "center",
     fontSize: 16,
   },
@@ -228,6 +336,108 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     // padding: 10,
+  },
+  imageContainer: {
+    marginTop: 5,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  badgeImage: {
+    width: 60,
+    height: 80,
+    resizeMode: "contain",
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginLeft: 8,
+  },
+  progressBarContainer: {
+    marginLeft: 68,
+    width: "70%",
+    height: 20,
+    borderWidth: 1,
+    borderColor: "#000",
+    backgroundColor: "#000",
+    borderRadius: 30,
+    flexDirection: "row",
+    overflow: "hidden",
+  },
+  level: {
+    flex: 1,
+    height: "100%",
+    marginRight: 1.5,
+  },
+  activeLevel: {
+    backgroundColor: "#F9D866",
+    position: "relative",
+  },
+  inactiveLevel: {
+    backgroundColor: "#F7CF47",
+    position: "relative",
+  },
+  levelText: {
+    fontSize: 14,
+    marginTop: 8,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  wrapContainer: {
+    marginTop: 60,
+
+    marginBottom: 10,
+    marginLeft: 10,
+  },
+  boxContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 10,
+    gap: 10,
+  },
+  box: {
+    paddingVertical: 30,
+    //borderWidth: 1,
+    borderColor: "#000",
+    borderRadius: 15,
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: "#F7CF47",
+    width: "45%",
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 6,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3.84,
+  },
+  boxText: {
+    flexDirection: "column",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#000",
+  },
+  containerWrapper: {
+    //flex: 1,
+    backgroundColor: "#F7CF47",
+    margin: 10,
+
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  container: {
+    padding: 10,
   },
 });
 

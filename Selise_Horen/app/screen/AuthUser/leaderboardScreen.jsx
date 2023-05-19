@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,18 +6,32 @@ import {
   Image,
   Switch,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import LottieView from "lottie-react-native";
+import championCelebration from "../../../assets/108242-ellipse-bust.json";
 import coin from "../../../assets/image/coin3.png";
-import sport5 from "../../../assets/image/sport5.png";
+
 import noel_bhai_modified from "../../../assets/image/noel_bhai_modified.png";
+import rank from "../../../assets/image/27525-removebg.png";
 
 const LeaderboardScreen = () => {
   const [isTodaySelected, setIsTodaySelected] = useState(true);
 
+  const [hasWon, setHasWon] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
+  useEffect(() => {
+    setHasWon(true);
+  }, []);
+  useEffect(() => {
+    setAnimationKey(animationKey + 1);
+  }, [hasWon]);
+
   return (
     <LinearGradient
-      colors={["#F7CF47", "#F7CF47"]}
+      // colors={["#F7CF47", "#FFEF99"]}
+      colors={["#000000", "#000000"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={{
@@ -37,21 +51,30 @@ const LeaderboardScreen = () => {
         }}
       >
         <View
-          style={{
-            backgroundColor: "#000000",
-            borderRadius: 10,
-            padding: 10,
-          }}
+        // style={{
+        //   backgroundColor: "#000000",
+        //   borderRadius: 10,
+        //   padding: 10,
+        // }}
         >
-          <Text style={{ color: "#F7CF47", fontSize: 18 }}>
-            {isTodaySelected ? "Week" : "Today"}
-          </Text>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#F7CF47",
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+              borderRadius: 25,
+            }}
+          >
+            <Text style={{ color: "#000000", fontSize: 18 }}>
+              {isTodaySelected ? "Week" : "Today"}
+            </Text>
+          </TouchableOpacity>
         </View>
 
         <Switch
           value={isTodaySelected}
           onValueChange={(value) => setIsTodaySelected(value)}
-          trackColor={{ false: "#D3D3D3", true: "#000000" }}
+          trackColor={{ false: "#D3D3D3", true: "#F7CF47" }}
         />
       </View>
       <View
@@ -66,50 +89,62 @@ const LeaderboardScreen = () => {
           source={noel_bhai_modified}
           style={{
             position: "absolute",
-            top: 20,
+            top: 40,
             left: 165,
             zIndex: 10,
             width: 60,
             height: 60,
+            borderWidth: 0.5,
             borderRadius: 60,
-            borderColor: "#000000",
+            borderColor: "#F7CF47",
           }}
         />
+
         <Image
           source={noel_bhai_modified}
           style={{
             position: "absolute",
-            top: 80,
-            left: 58,
+            top: 110,
+            left: 75,
             zIndex: 10,
             width: 60,
             height: 60,
+            borderWidth: 0.5,
             borderRadius: 60,
-            borderColor: "#000000",
+            borderColor: "#F7CF47",
           }}
         />
+
         <Image
           source={noel_bhai_modified}
           style={{
             position: "absolute",
-            top: 90,
-            left: 275,
+            top: 112,
+            left: 265,
             zIndex: 10,
             width: 60,
             height: 60,
-            borderWidth: 3,
+            borderWidth: 0.5,
             borderRadius: 60,
-            borderColor: "white",
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 3,
-            },
-            shadowOpacity: 0.29,
-            shadowRadius: 4.65,
+            borderColor: "#F7CF47",
           }}
         />
-        <Image source={sport5} style={{ width: 300, height: 321 }} />
+        {hasWon && (
+          <LottieView
+            key={animationKey}
+            source={championCelebration}
+            autoPlay
+            loop={false}
+            style={{
+              position: "absolute",
+              top: -80,
+              left: 0,
+              width: 300,
+              height: 300,
+            }}
+          />
+        )}
+        <Image source={rank} style={{ width: 300, height: 305 }} />
       </View>
 
       <View
@@ -118,7 +153,7 @@ const LeaderboardScreen = () => {
           height: 300,
           bottom: -10,
           left: 20,
-          backgroundColor: "#000000",
+          backgroundColor: "#F7CF47",
           width: "90%",
 
           borderRadius: 10,
@@ -132,20 +167,20 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
-
-              marginBottom: 10,
+              marginBottom: 15,
+              marginHorizontal: -10,
             }}
           >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}>4</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            <Text style={{ color: "#000000", fontSize: 18 }}>4</Text>
+            <View style={{ flex: 0.5 }}>
+              <Text style={{ color: "#000000", fontSize: 18 }}>D.vas</Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={coin}
                 style={{ width: 20, height: 20, marginRight: 5 }}
               />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+              <Text style={{ color: "#000000", fontSize: 18 }}>8682</Text>
             </View>
           </View>
           <View
@@ -153,19 +188,22 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
-              marginBottom: 10,
+              marginBottom: 15,
+              marginHorizontal: -10,
             }}
           >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}>5</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            <Text style={{ color: "#000000", fontSize: 18 }}>5</Text>
+            <View style={{ flex: 0.5 }}>
+              <Text style={{ color: "#000000", fontSize: 18 }}>
+                Samiya Kazi
+              </Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={coin}
                 style={{ width: 20, height: 20, marginRight: 5 }}
               />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+              <Text style={{ color: "#000000", fontSize: 18 }}>8670</Text>
             </View>
           </View>
           <View
@@ -173,19 +211,20 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
-              marginBottom: 10,
+              marginBottom: 15,
+              marginHorizontal: -10,
             }}
           >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 6</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            <Text style={{ color: "#000000", fontSize: 18 }}>6</Text>
+            <View style={{ flex: 0.5 }}>
+              <Text style={{ color: "#000000", fontSize: 18 }}>Noel Alam</Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={coin}
                 style={{ width: 20, height: 20, marginRight: 5 }}
               />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+              <Text style={{ color: "#000000", fontSize: 18 }}>7780</Text>
             </View>
           </View>
           <View
@@ -193,19 +232,22 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
-              marginBottom: 10,
+              marginBottom: 15,
+              marginHorizontal: -10,
             }}
           >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            <Text style={{ color: "#000000", fontSize: 18 }}>7</Text>
+            <View style={{ flex: 0.5 }}>
+              <Text style={{ color: "#000000", fontSize: 18 }}>
+                Asif Bin Abedin
+              </Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={coin}
                 style={{ width: 20, height: 20, marginRight: 5 }}
               />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+              <Text style={{ color: "#000000", fontSize: 18 }}>7780</Text>
             </View>
           </View>
           <View
@@ -213,19 +255,20 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
-              marginBottom: 10,
+              marginBottom: 15,
+              marginHorizontal: -10,
             }}
           >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            <Text style={{ color: "#000000", fontSize: 18 }}>8</Text>
+            <View style={{ flex: 0.5 }}>
+              <Text style={{ color: "#000000", fontSize: 18 }}>Zahid</Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={coin}
                 style={{ width: 20, height: 20, marginRight: 5 }}
               />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+              <Text style={{ color: "#000000", fontSize: 18 }}>7780</Text>
             </View>
           </View>
           <View
@@ -233,19 +276,22 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
-              marginBottom: 10,
+              marginBottom: 15,
+              marginHorizontal: -10,
             }}
           >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            <Text style={{ color: "#000000", fontSize: 18 }}>9</Text>
+            <View style={{ flex: 0.5 }}>
+              <Text style={{ color: "#000000", fontSize: 18 }}>
+                Pollock Nag
+              </Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={coin}
                 style={{ width: 20, height: 20, marginRight: 5 }}
               />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+              <Text style={{ color: "#000000", fontSize: 18 }}>7780</Text>
             </View>
           </View>
           <View
@@ -253,19 +299,20 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
-              marginBottom: 10,
+              marginBottom: 15,
+              marginHorizontal: -10,
             }}
           >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            <Text style={{ color: "#000000", fontSize: 18 }}>6</Text>
+            <View style={{ flex: 0.5 }}>
+              <Text style={{ color: "#000000", fontSize: 18 }}>Noel Alam</Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={coin}
                 style={{ width: 20, height: 20, marginRight: 5 }}
               />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+              <Text style={{ color: "#000000", fontSize: 18 }}>7780</Text>
             </View>
           </View>
           <View
@@ -273,19 +320,20 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
-              marginBottom: 10,
+              marginBottom: 15,
+              marginHorizontal: -10,
             }}
           >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            <Text style={{ color: "#000000", fontSize: 18 }}>6</Text>
+            <View style={{ flex: 0.5 }}>
+              <Text style={{ color: "#000000", fontSize: 20 }}>Noel Alam</Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={coin}
                 style={{ width: 20, height: 20, marginRight: 5 }}
               />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+              <Text style={{ color: "#000000", fontSize: 18 }}>7780</Text>
             </View>
           </View>
           <View
@@ -293,19 +341,20 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
-              marginBottom: 10,
+              marginBottom: 15,
+              marginHorizontal: -10,
             }}
           >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            <Text style={{ color: "#000000", fontSize: 18 }}>6</Text>
+            <View style={{ flex: 0.5 }}>
+              <Text style={{ color: "#000000", fontSize: 18 }}>Noel Alam</Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={coin}
                 style={{ width: 20, height: 20, marginRight: 5 }}
               />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+              <Text style={{ color: "#000000", fontSize: 18 }}>7780</Text>
             </View>
           </View>
           <View
@@ -313,152 +362,20 @@ const LeaderboardScreen = () => {
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-around",
+              marginBottom: 15,
+              marginHorizontal: -10,
             }}
           >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
+            <Text style={{ color: "#000000", fontSize: 18 }}>6</Text>
+            <View style={{ flex: 0.5 }}>
+              <Text style={{ color: "#000000", fontSize: 18 }}>Noel Alam</Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={coin}
                 style={{ width: 20, height: 20, marginRight: 5 }}
               />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-          >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Image
-                source={coin}
-                style={{ width: 20, height: 20, marginRight: 5 }}
-              />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-          >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Image
-                source={coin}
-                style={{ width: 20, height: 20, marginRight: 5 }}
-              />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-          >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Image
-                source={coin}
-                style={{ width: 20, height: 20, marginRight: 5 }}
-              />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-          >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Image
-                source={coin}
-                style={{ width: 20, height: 20, marginRight: 5 }}
-              />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-          >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Image
-                source={coin}
-                style={{ width: 20, height: 20, marginRight: 5 }}
-              />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-          >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Image
-                source={coin}
-                style={{ width: 20, height: 20, marginRight: 5 }}
-              />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-          >
-            <Text style={{ color: "#F7CF47", fontSize: 20 }}> 7</Text>
-            <View>
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>D.vas</Text>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Image
-                source={coin}
-                style={{ width: 20, height: 20, marginRight: 5 }}
-              />
-              <Text style={{ color: "#F7CF47", fontSize: 20 }}>8682</Text>
+              <Text style={{ color: "#000000", fontSize: 18 }}>7780</Text>
             </View>
           </View>
         </ScrollView>
