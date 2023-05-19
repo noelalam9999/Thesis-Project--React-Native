@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
-import AuthService from "../../services/Auth.service";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BarChart } from "react-native-chart-kit";
-import { Dimensions } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import Medal from "../../../assets/image/medal.png";
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import AuthService from '../../services/Auth.service';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BarChart } from 'react-native-chart-kit';
+import { Dimensions } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import Medal from '../../../assets/image/medal.png';
 
 const BarchartData = [
   { x: 5, y: 0 },
@@ -22,7 +22,7 @@ const BarchartData = [
 ];
 
 const ProfileScreen = () => {
-  const [accessToken, setAccessToken] = useState("");
+  const [accessToken, setAccessToken] = useState('');
 
   useEffect(() => {
     retrieveAccessToken();
@@ -30,16 +30,16 @@ const ProfileScreen = () => {
 
   const retrieveAccessToken = async () => {
     try {
-      const token = await AsyncStorage.getItem("accessToken");
+      const token = await AsyncStorage.getItem('accessToken');
       if (token) {
         setAccessToken(token);
       }
     } catch (error) {
-      console.log("Error retrieving access token:", error);
+      console.log('Error retrieving access token:', error);
     }
   };
-  const handleLogout = () => {
-    AuthService.logout(accessToken);
+  const handleLogout = async () => {
+    await AuthService.logout('token');
   };
 
   return (
@@ -79,12 +79,11 @@ const ProfileScreen = () => {
         <View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
               marginTop: 40,
               marginLeft: 60,
-            }}
-          >
+            }}>
             <Image source={Medal} style={{ width: 25, height: 30 }} />
             <Text style={{ fontSize: 15, marginLeft: 5 }}>
               Number of Badge Collections
@@ -97,14 +96,14 @@ const ProfileScreen = () => {
                 { data: BarchartData.map((dataPoint) => dataPoint.y) },
               ],
             }}
-            width={Dimensions.get("window").width}
+            width={Dimensions.get('window').width}
             height={220}
             yAxisSuffix=""
             yAxisInterval={1}
             chartConfig={{
-              backgroundColor: "#F7CF47",
-              backgroundGradientFrom: "#F7CF47",
-              backgroundGradientTo: "#F7CF47",
+              backgroundColor: '#F7CF47',
+              backgroundGradientFrom: '#F7CF47',
+              backgroundGradientTo: '#F7CF47',
               decimalPlaces: 0,
               color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
@@ -122,11 +121,11 @@ const ProfileScreen = () => {
         <View style={styles.bottomButton}>
           <TouchableOpacity style={styles.editButton}>
             <MaterialIcons name="edit" size={24} color="#000" />
-            <Text style={{ color: "#000" }}>Edit Profile</Text>
+            <Text style={{ color: '#000' }}>Edit Profile</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.editButton}>
+          <TouchableOpacity style={styles.editButton} onPress={handleLogout}>
             <MaterialIcons name="logout" size={24} color="#000" />
-            <Text style={{ color: "#000" }}>Signout</Text>
+            <Text style={{ color: '#000' }}>Signout</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -137,13 +136,13 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F7CF47",
+    backgroundColor: '#F7CF47',
     padding: 8,
   },
   body: {
     marginTop: 40,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   scrollView: {
     marginTop: 20,
@@ -152,10 +151,10 @@ const styles = StyleSheet.create({
     width: 140,
     height: 140,
     borderRadius: 70,
-    backgroundColor: "#FFFFFF",
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000000",
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000000',
     shadowOffset: {
       width: 0,
       height: 3,
@@ -165,45 +164,45 @@ const styles = StyleSheet.create({
   },
   avatar: {
     fontSize: 72,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   nameContainer: {
     marginTop: 24,
-    alignItems: "center",
+    alignItems: 'center',
   },
   name: {
-    color: "#000000",
+    color: '#000000',
     fontSize: 24,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   infoContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 10,
     marginLeft: 12,
   },
   infoLabel: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginRight: 10,
   },
   infoText: {
-    color: "#000000",
+    color: '#000000',
     fontSize: 16,
   },
   number: {
-    color: "#F7CF47",
+    color: '#F7CF47',
     fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   label: {
-    color: "#F7CF47",
-    textAlign: "center",
+    color: '#F7CF47',
+    textAlign: 'center',
   },
   bottomContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginTop: 30,
     marginBottom: 20,
     gap: 5,
@@ -211,35 +210,35 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     marginBottom: 20,
     marginTop: 10,
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   button: {
-    width: "30%",
-    backgroundColor: "#000000",
+    width: '30%',
+    backgroundColor: '#000000',
     borderRadius: 30,
     paddingVertical: 2,
     paddingHorizontal: 2,
     marginHorizontal: 2,
   },
   bottomButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginHorizontal: 5,
     marginTop: 120,
     marginBottom: 40,
   },
   editButton: {
-    flexDirection: "row",
-    backgroundColor: "#F7CF47",
+    flexDirection: 'row',
+    backgroundColor: '#F7CF47',
     paddingVertical: 8,
     paddingHorizontal: 10,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#F7CF47",
+    borderColor: '#F7CF47',
     marginLeft: 5,
-    shadowColor: "#000000",
+    shadowColor: '#000000',
     shadowOffset: {
       width: 0,
       height: 2,

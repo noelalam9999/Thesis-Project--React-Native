@@ -1,17 +1,17 @@
-import axios from "axios";
-import Backend from "../config";
-import config from "../config";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'axios';
+import Backend from '../config';
+import config from '../config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AuthService = {};
 AuthService.register = async (user) => {
   try {
     return fetch(`${config.USER_URL}/register`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      credentials: "include",
+      credentials: 'include',
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
@@ -27,11 +27,11 @@ AuthService.register = async (user) => {
 AuthService.login = async (user) => {
   try {
     return fetch(`${config.USER_URL}/login`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      credentials: "include",
+      credentials: 'include',
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
@@ -45,8 +45,13 @@ AuthService.login = async (user) => {
 
 AuthService.profile = (acesssToken) => {};
 
-AuthService.logout = (acesssToken) => {
-  AsyncStorage.removeItem(acesssToken);
+AuthService.logout = async (acesssToken) => {
+  try {
+    console.log('here');
+    await AsyncStorage.removeItem(acesssToken);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export default AuthService;
