@@ -4,24 +4,27 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import AuthService from "../../services/Auth.service";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BarChart } from "react-native-chart-kit";
+import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import Medal from "../../../assets/image/medal.png";
+import bronze from "../../../assets/image/bronze-medal.png";
+import silver from "../../../assets/image/silver-medal.png";
+import gold from "../../../assets/image/gold-medal.png";
 
-const BarchartData = [
-  { x: 5, y: 0 },
-  { x: 10, y: 1 },
-  { x: 15, y: 2 },
-  { x: 20, y: 3 },
-  { x: 25, y: 4 },
-  { x: 30, y: 5 },
-  { x: 35, y: 6 },
-  { x: 40, y: 7 },
-  { x: 45, y: 8 },
+const LinechartData = [
+  { x: 1, y: 10 },
+  { x: 2, y: 5 },
+  { x: 3, y: 3 },
+  { x: 4, y: 18 },
+  { x: 5, y: 9 },
+  { x: 6, y: 25 },
+  { x: 7, y: 4 },
+  { x: 8, y: 6 },
+  { x: 9, y: 1 },
+  { x: 10, y: 12 },
 ];
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = ({ navigation, route }) => {
   const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
@@ -86,16 +89,16 @@ const ProfileScreen = ({ navigation }) => {
               marginLeft: 60,
             }}
           >
-            <Image source={Medal} style={{ width: 25, height: 30 }} />
+            {/* <Image source={Medal} style={{ width: 25, height: 30 }} /> */}
             <Text style={{ fontSize: 15, marginLeft: 5 }}>
               Number of Badge Collections
             </Text>
           </View>
-          <BarChart
+          <LineChart
             data={{
-              labels: BarchartData.map((dataPoint) => dataPoint.x.toString()),
+              labels: LinechartData.map((dataPoint) => dataPoint.x.toString()),
               datasets: [
-                { data: BarchartData.map((dataPoint) => dataPoint.y) },
+                { data: LinechartData.map((dataPoint) => dataPoint.y) },
               ],
             }}
             width={Dimensions.get("window").width}
@@ -110,6 +113,7 @@ const ProfileScreen = ({ navigation }) => {
               color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
             }}
+            bezier
             style={{
               marginVertical: 8,
               borderRadius: 16,
@@ -117,11 +121,30 @@ const ProfileScreen = ({ navigation }) => {
               marginLeft: -45,
               marginRight: 10,
             }}
+            renderDotContent={({ x, y, index }) => {
+              if (index === 2) {
+                return (
+                  <Image source={bronze} style={{ width: 20, height: 20 }} />
+                );
+              } else if (index === 5) {
+                return (
+                  <Image source={silver} style={{ width: 20, height: 20 }} />
+                );
+              } else if (index === 8) {
+                return (
+                  <Image source={gold} style={{ width: 20, height: 20 }} />
+                );
+              }
+              return null;
+            }}
           />
         </View>
 
         <View style={styles.bottomButton}>
-          <TouchableOpacity style={styles.editButton}>
+          <TouchableOpacity
+            style={styles.editButton}
+            onPress={() => navigation.navigate("EditProfile")}
+          >
             <MaterialIcons name="edit" size={24} color="#000" />
             <Text style={{ color: "#000" }}>Edit Profile</Text>
           </TouchableOpacity>

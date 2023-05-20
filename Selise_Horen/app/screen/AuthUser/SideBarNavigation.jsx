@@ -114,6 +114,7 @@ const AppNavigator = () => {
 
       {loggedIn ? (
         <Drawer.Navigator
+          initialRouteName="Profile"
           screenOptions={{
             drawerStyle: {
               flex: 1,

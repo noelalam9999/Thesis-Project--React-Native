@@ -4,6 +4,6 @@ export default Config = {
     Users: "",
     Signals: "",
   },
-  API_URL: "https://8ea0-59-152-97-85.ngrok-free.app", //sales server
-  USER_URL: "https://3e14-59-152-97-85.ngrok-free.app",
+  API_URL: "https://2881-59-152-97-85.ngrok-free.app", //sales server
+  USER_URL: "https://5b64-113-11-37-36.ngrok-free.app",
 };

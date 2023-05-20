@@ -4,6 +4,7 @@ import SignUpScreen from "./SignupScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "react-native";
 import HomeScreen from "./AuthUser/HomeScreen";
+import EditProfile from "./AuthUser/EditProfile";
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ export default LoginSignUp = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Horen" component={HomeScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

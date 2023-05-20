@@ -202,7 +202,7 @@ const HomeScreen = () => {
               marginRight: 30,
             }}
           /> */}
-          <ECharts option={option} />
+          {/* <ECharts option={option} backgroundColor="rgba(93, 169, 81, 0.3)" /> */}
         </View>
         <View style={styles.containerWrapper}>
           <View

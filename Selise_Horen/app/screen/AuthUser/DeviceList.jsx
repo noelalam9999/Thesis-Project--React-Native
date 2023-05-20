@@ -6,10 +6,13 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Image,
 } from "react-native";
 import Modal from "react-native-modal";
 import { MaterialIcons } from "@expo/vector-icons";
 import Icon from "react-native-vector-icons/FontAwesome";
+import horn from "../../../assets/image/horn.png";
+import hours from "../../../assets/image/hours.png";
 const vehicles = [
   {
     id: 1,
@@ -171,14 +174,19 @@ const DeviceList = () => {
               <Text style={styles.name}>{vehicle.name}</Text>
               <View style={styles.infoContainer}>
                 <Text style={styles.infoText}>
-                  <Icon name="bullhorn" size={20} color="#000000" /> : 30
+                  <Image
+                    source={horn}
+                    style={{ width: 25, height: 25 }}
+                  ></Image>{" "}
+                  : 30
                 </Text>
-                {/* <Text style={styles.infoText}>
-                  <MaterialIcons name="drive-eta" size={20} color={"#000000"} />
-                  : 15Km{" "}
-                </Text> */}
+
                 <Text style={styles.infoText}>
-                  <Icon name="hourglass-2" size={20} color="#000000" /> : 4 Hour{" "}
+                  <Image
+                    source={hours}
+                    style={{ width: 25, height: 25 }}
+                  ></Image>
+                  : 4 Hour{" "}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -191,8 +199,12 @@ const DeviceList = () => {
             {selectedVehicle ? selectedVehicle.name : ""}
           </Text>
 
-          {/* <Text>{selectedVehicle.qr_code}</Text>
-          <Text>{selectedVehicle.device_configure}</Text> */}
+          <View style={styles.detailsContainer}>
+            <Text style={styles.detailsText}>QR Code: random qr code</Text>
+            <Text style={styles.detailsText}>
+              Device Configure:some randome device configured
+            </Text>
+          </View>
 
           <TouchableOpacity
             style={styles.closeButton}
@@ -221,17 +233,18 @@ const styles = StyleSheet.create({
   claimedButton: {
     backgroundColor: "#000000",
     borderRadius: 20,
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   claimedText: {
     color: "#F7CF47",
     fontWeight: "bold",
+    fontSize: 16,
   },
   searchButton: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-
     borderBottomWidth: 0.5,
     borderBottomColor: "#000000",
     paddingHorizontal: 10,
@@ -251,10 +264,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#C5A538",
     borderRadius: 10,
-    height: "6%",
-    marginBottom: 7,
+    height: 60,
+    marginBottom: 10,
     padding: 12,
-
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -265,7 +277,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     flex: 1,
     textAlign: "left",
-    marginRight: 70,
+    marginRight: 20,
   },
   infoContainer: {
     flexDirection: "row",
@@ -278,34 +290,52 @@ const styles = StyleSheet.create({
     color: "#000000",
     textAlign: "right",
   },
-
   modalContainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#000000",
+    backgroundColor: "#F7CF47",
     borderRadius: 10,
     width: "80%",
     height: "50%",
     marginHorizontal: "10%",
     paddingHorizontal: 20,
+    elevation: 5,
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowRadius: 5,
   },
   modalText: {
-    color: "#F7CF47",
+    color: "#000000",
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
   },
   closeButton: {
-    backgroundColor: "#F7CF47",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    backgroundColor: "#000000",
+    paddingVertical: 12,
+    paddingHorizontal: 30,
     borderRadius: 5,
+    marginTop: 20,
   },
   closeButtonText: {
-    color: "#ffffff",
+    color: "#F7CF47",
     fontWeight: "bold",
     fontSize: 18,
+    textAlign: "center",
+  },
+  detailsContainer: {
+    marginTop: 20,
+  },
+  detailsText: {
+    fontSize: 16,
+    color: "#000000",
+    marginBottom: 10,
+    textAlign: "center",
   },
 });
 

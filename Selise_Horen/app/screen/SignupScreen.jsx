@@ -14,7 +14,6 @@ import * as ImagePicker from "expo-image-picker";
 import AuthService from "../services/Auth.service";
 import { set } from "react-native-reanimated";
 import LoginScreen from "./LoginScreen";
-import { CloudinaryImage } from "@cloudinary/url-gen";
 
 const SignupScreen = ({ navigation, route }) => {
   const [name, setName] = useState("");
@@ -25,7 +24,6 @@ const SignupScreen = ({ navigation, route }) => {
 
   const { isLoggedIn } = route.params;
 
-  //const [confPass, setConfPass] = useState("");
   const [image, setImage] = useState("");
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -42,8 +40,6 @@ const SignupScreen = ({ navigation, route }) => {
 
   const handleSubmit = async () => {
     try {
-      const image = await CloudinaryImage.uploader.upload(image);
-      const imageurl = image.secure_url;
       const userInfo = {
         name: name,
         email: email,

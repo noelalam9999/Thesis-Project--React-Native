@@ -26,8 +26,8 @@ const PurchaseDevice = () => {
   const [allCity, setAllCity] = useState([]);
   const [city, setCity] = useState({});
 
-  const [zones, setZones] = useState([]);
-  const [zone, setZone] = useState({});
+  const [zones, setZones] = useState([]); //all zone
+  const [zone, setZone] = useState({}); //selected zone
 
   const [areas, setAreas] = useState([]);
   const [area, setArea] = useState({});
