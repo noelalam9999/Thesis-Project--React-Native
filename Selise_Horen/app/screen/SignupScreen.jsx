@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {
   View,
@@ -13,15 +13,31 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as ImagePicker from "expo-image-picker";
 import AuthService from "../services/Auth.service";
 import { set } from "react-native-reanimated";
-import LoginScreen from "./LoginScreen";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { useNavigation } from "@react-navigation/native";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
 
-const SignupScreen = ({ navigation, route }) => {
+import * as AuthSession from "expo-auth-session";
+
+AuthSession.makeRedirectUri();
+
+WebBrowser.maybeCompleteAuthSession();
+
+const SignupScreen = ({ route }) => {
+  const navigation = useNavigation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
+  const [userInfo, setUserInfo] = useState(null);
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId:
+      "817453303535-urc0dcloheraap8nt91abpmcdigi74ec.apps.googleusercontent.com",
+    redirectUri: "http://localhost:19000",
+  });
 
   const { isLoggedIn } = route.params;
 
@@ -80,6 +96,29 @@ const SignupScreen = ({ navigation, route }) => {
       }
     } catch (error) {
       console.log("could not sign up");
+    }
+  };
+  useEffect(() => {
+    if (response?.type === "success") {
+      setToken(response.params.access_token);
+      getUserInfo(response.params.access_token);
+    }
+  }, [response]);
+  const getUserInfo = async (accessToken) => {
+    try {
+      const response = await fetch(
+        "https://www.googleapis.com/userinfo/v2/me",
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+
+      const user = await response.json();
+      setUserInfo(user);
+      navigation.navigate("Home");
+      //isLoggedIn(true);
+    } catch (error) {
+      console.log("error");
     }
   };
 
@@ -152,12 +191,22 @@ const SignupScreen = ({ navigation, route }) => {
         <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
           <Text style={{ color: "white" }}>Sign Up</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.googleButton}>
-          <View style={styles.googleButtonIcon}>
-            <Icon name="google" size={20} color="white" />
-          </View>
-          <Text style={styles.googleButtonText}>Sign in with Google</Text>
-        </TouchableOpacity>
+        {userInfo === null ? (
+          <TouchableOpacity
+            style={styles.googleButton}
+            disabled={!request}
+            onPress={() => {
+              promptAsync();
+            }}
+          >
+            <View style={styles.googleButtonIcon}>
+              <Icon name="google" size={20} color="white" />
+            </View>
+            <Text style={styles.googleButtonText}>Sign in with Google</Text>
+          </TouchableOpacity>
+        ) : (
+          <Text style={styles.text}>{userInfo.name}</Text>
+        )}
       </View>
       <View style={styles.loginContainer}>
         <Text style={styles.loginText}>Already have an account?</Text>
