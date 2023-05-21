@@ -14,6 +14,7 @@ import * as ImagePicker from "expo-image-picker";
 import AuthService from "../services/Auth.service";
 import { set } from "react-native-reanimated";
 import LoginScreen from "./LoginScreen";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 const SignupScreen = ({ navigation, route }) => {
   const [name, setName] = useState("");
@@ -26,15 +27,38 @@ const SignupScreen = ({ navigation, route }) => {
 
   const [image, setImage] = useState("");
   const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        base64: true,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
 
-    if (!result.canceled) {
-      setImage(result.uri);
+      if (!result.canceled) {
+        //console.log(result);
+        const cloudinaryImage = new FormData();
+        cloudinaryImage.append(
+          "file",
+          "data:image/jpeg;base64," + result.base64
+        );
+        cloudinaryImage.append("upload_preset", "Horen_mare");
+        const response = await fetch(
+          "https://api.cloudinary.com/v1_1/diomcrrey/image/upload",
+          {
+            method: "POST",
+            body: cloudinaryImage,
+          }
+        )
+          .then((response) => response.json())
+          .then((responseData) => {
+            const imageUrl = responseData.url;
+            setImage(imageUrl);
+          });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -46,9 +70,10 @@ const SignupScreen = ({ navigation, route }) => {
         phone: phone,
         address: address,
         password: password,
-        profilePic: imageurl,
+        profilePic: image,
       };
       const response = await AuthService.register(userInfo);
+      console.log(response);
       if (response) {
         console.log("signup successful");
         isLoggedIn(true);
@@ -113,17 +138,7 @@ const SignupScreen = ({ navigation, route }) => {
           value={password}
           onChangeText={setPassword}
         ></TextInput>
-        {/* <TextInput
-          secureTextEntry={true}
-          autoCapitalize="none"
-          autoComplete="password-new"
-          autoCorrect={false}
-          style={styles.input}
-          placeholder="Confirm Password"
-          placeholderTextColor="#666666"
-          onChangeText={(text) => setConfPass(text)}
-        ></TextInput> */}
-        {/* Add Input image field */}
+
         <TouchableOpacity style={styles.button} onPress={pickImage}>
           <Text style={styles.buttonText} value={image} onChangeText={setImage}>
             Select image

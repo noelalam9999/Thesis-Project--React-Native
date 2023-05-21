@@ -27,6 +27,8 @@ const LinechartData = [
 const ProfileScreen = ({ navigation, route }) => {
   const [accessToken, setAccessToken] = useState("");
 
+  const { isLoggedIn } = route.params;
+
   useEffect(() => {
     retrieveAccessToken();
   }, []);
@@ -41,9 +43,10 @@ const ProfileScreen = ({ navigation, route }) => {
       console.log("Error retrieving access token:", error);
     }
   };
+
   const handleLogout = async () => {
     await AuthService.logout("token");
-    navigation.navigate("Login");
+    isLoggedIn(false);
   };
 
   return (

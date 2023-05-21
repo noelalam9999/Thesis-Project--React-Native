@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import MapView from "react-native-maps";
-import { Marker, Heatmap } from "react-native-maps";
-import Map from "../../../assets/Map.json";
+import { Marker, Heatmap, Geojson } from "react-native-maps";
+
 import * as Animatable from "react-native-animatable";
 
 const HeatMap = () => {
@@ -23,6 +23,15 @@ const HeatMap = () => {
   ];
   return (
     <View style={styles.container}>
+      {/* <MapView style={styles.map}>
+        <Geojson geojson={Dhaka} fillColor="rgba(255,0,0,0.5)" />
+        <Marker
+          coordinate={{ latitude: 23.8103, longitude: 90.4125 }}
+          title={"Dhaka, Bangladesh"}
+          description={"The capital of Bangladesh"}
+          pinColor={"blue"}
+        />
+      </MapView> */}
       <MapView style={styles.map} initialRegion={initialRegion}>
         <Marker
           coordinate={{ latitude: 23.8103, longitude: 90.4125 }}

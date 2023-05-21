@@ -114,7 +114,6 @@ const AppNavigator = () => {
 
       {loggedIn ? (
         <Drawer.Navigator
-          initialRouteName="Profile"
           screenOptions={{
             drawerStyle: {
               flex: 1,
@@ -231,6 +230,9 @@ const AppNavigator = () => {
                 color: "#F7CF47",
               },
             }}
+            initialParams={{
+              isLoggedIn: setLoggedIn,
+            }}
             component={ProfileScreen}
           />
 
@@ -300,6 +302,25 @@ const AppNavigator = () => {
               isLoggedIn: setLoggedIn,
             }}
           />
+          {/* <Drawer.Screen
+            name="Profile"
+            options={{
+              drawerIcon: () => <Icon name="user" size={24} color="#F7CF47" />,
+
+              headerStyle: {
+                backgroundColor: "#000000",
+              },
+              headerTintColor: "#F7CF47",
+              headerTitleStyle: {
+                fontWeight: "bold",
+                color: "#F7CF47",
+              },
+              drawerLabelStyle: {
+                color: "#F7CF47",
+              },
+            }}
+            component={ProfileScreen}
+          /> */}
         </Drawer.Navigator>
       )}
     </NavigationContainer>

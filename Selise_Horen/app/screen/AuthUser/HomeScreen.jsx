@@ -171,7 +171,7 @@ const HomeScreen = () => {
           >
             <Text style={{ fontSize: 15 }}>Number of Horns played per day</Text>
           </View>
-          {/* <LineChart
+          <LineChart
             data={{
               labels: chartData1.map((dataPoint) => dataPoint.x),
               datasets: [
@@ -201,7 +201,7 @@ const HomeScreen = () => {
               marginLeft: 8,
               marginRight: 30,
             }}
-          /> */}
+          />
           {/* <ECharts option={option} backgroundColor="rgba(93, 169, 81, 0.3)" /> */}
         </View>
         <View style={styles.containerWrapper}>

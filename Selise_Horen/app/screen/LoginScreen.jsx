@@ -23,10 +23,12 @@ const LoginScreen = ({ navigation, route }) => {
     try {
       const user = { email: email, password: password };
       const response = await AuthService.login(user);
+      //console.log("baal", response);
       if (response) {
         console.log(response);
         await AsyncStorage.setItem("token", response.accessToken);
-        console.log("login successful");
+        await AsyncStorage.setItem("userId", response.id);
+        //console.log("login successful");
         isLoggedIn(true);
       } else {
         console.log("Email or password is incorrect");
