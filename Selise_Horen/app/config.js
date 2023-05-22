@@ -4,7 +4,7 @@ export default Config = {
     Users: "",
     Signals: "",
   },
-  API_URL: "https://d830-113-11-37-36.ngrok-free.app", //sales server
-  USER_URL: "https://4948-113-11-37-36.ngrok-free.app",
-  Device_URL: "https://0016-113-11-37-36.ngrok-free.app",
+  API_URL: "https://order-service.fly.dev", //sales server
+  USER_URL: "https://f8a1-113-11-37-36.ngrok-free.app",
+  Device_URL: "https://f8a1-113-11-37-36.ngrok-free.app",
 };

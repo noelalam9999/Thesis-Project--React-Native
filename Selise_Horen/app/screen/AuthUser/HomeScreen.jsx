@@ -16,6 +16,7 @@ import noise from "../../../assets/image/noise.png";
 import pollution from "../../../assets/image/noise-pollution.png";
 import road from "../../../assets/image/road.png";
 import hour from "../../../assets/image/24-hours.png";
+import scatter from "../../../assets/image/scatter-plot.png";
 import { ECharts } from "react-native-echarts-wrapper";
 const chartData1 = [
   { x: 1, y: 50 },
@@ -169,7 +170,9 @@ const HomeScreen = () => {
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            <Text style={{ fontSize: 15 }}>Number of Horns played per day</Text>
+            <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+              Number of Horns played per day
+            </Text>
           </View>
           <LineChart
             data={{
@@ -202,7 +205,6 @@ const HomeScreen = () => {
               marginRight: 30,
             }}
           />
-          {/* <ECharts option={option} backgroundColor="rgba(93, 169, 81, 0.3)" /> */}
         </View>
         <View style={styles.containerWrapper}>
           <View
@@ -213,7 +215,9 @@ const HomeScreen = () => {
               marginTop: 20,
             }}
           >
-            <Text style={{ fontSize: 15 }}>Global Ranking</Text>
+            <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+              Global Ranking
+            </Text>
           </View>
           <LineChart
             data={{
@@ -254,7 +258,20 @@ const HomeScreen = () => {
             }}
           />
         </View>
+
         <View style={styles.containerWrapper}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+              Number of Horns vs Distance Travelled
+            </Text>
+          </View>
           <View style={{ marginLeft: 13 }}>
             <VictoryChart domain={{ x: [0, 35], y: [0, 35] }}>
               <VictoryScatter
@@ -274,13 +291,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7CF47",
   },
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginHorizontal: 20,
-    marginTop: 20,
-  },
+  container: { flexDirection: "row", justifyContent: "space-around" },
   title: {
     fontSize: 16,
     fontWeight: "bold",
@@ -288,19 +299,21 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
+    //marginLeft: 5,
     backgroundColor: "#000000",
-    width: "30%",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "35%",
     paddingVertical: 8,
     paddingHorizontal: 5,
     borderRadius: 30,
     borderWidth: 1,
     borderColor: "#000000",
     marginTop: 20,
-    marginLeft: 5,
-    marginRight: 40,
+    // marginLeft: 5,
+    // marginRight: 40,
   },
   dropdownButton: {
-    paddingVertical: 2,
     backgroundColor: "#000000",
     borderRadius: 30,
     borderWidth: 1,
@@ -343,6 +356,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   badgeImage: {
+    marginLeft: 58,
     width: 60,
     height: 80,
     resizeMode: "contain",
@@ -394,16 +408,19 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     gap: 10,
   },
+  boxRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   box: {
     paddingVertical: 30,
-    //borderWidth: 1,
     borderColor: "#000",
     borderRadius: 15,
     padding: 10,
     marginBottom: 10,
     backgroundColor: "#F7CF47",
     width: "45%",
-    justifyContent: "center",
+
     alignItems: "center",
     elevation: 6,
     shadowColor: "#000",
@@ -421,11 +438,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#000",
   },
+
   containerWrapper: {
     //flex: 1,
     backgroundColor: "#F7CF47",
     margin: 10,
-
+    gap: 15,
     borderRadius: 8,
     shadowColor: "#000",
     shadowOffset: {
@@ -436,9 +454,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  container: {
-    padding: 10,
-  },
+  // container: {
+  //   padding: 10,
+  // },
 });
 
 export default HomeScreen;

@@ -5,17 +5,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "react-native";
 import HomeScreen from "./AuthUser/HomeScreen";
 import EditProfile from "./AuthUser/EditProfile";
-
 const Stack = createStackNavigator();
 
 export default LoginSignUp = () => {
   return (
     <NavigationContainer style={{ backgroundColor: "#F7CF47" }}>
-      <StatusBar barStyle="light-content" backgroundColor="#F7CF47" />
+      <StatusBar barStyle="light-content" backgroundColor="#000" />
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#F7CF47",
+            backgroundColor: "#000000",
           },
         }}
       >

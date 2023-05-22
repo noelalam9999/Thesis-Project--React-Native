@@ -7,10 +7,10 @@ import * as Animatable from "react-native-animatable";
 
 const HeatMap = () => {
   const initialRegion = {
-    latitude: 23.8103,
-    longitude: 90.4125,
-    latitudeDelta: 2.5,
-    longitudeDelta: 2.5,
+    latitude: 23.685,
+    longitude: 90.3563,
+    latitudeDelta: 8,
+    longitudeDelta: 8,
   };
 
   const heatmapData = [
@@ -23,15 +23,6 @@ const HeatMap = () => {
   ];
   return (
     <View style={styles.container}>
-      {/* <MapView style={styles.map}>
-        <Geojson geojson={Dhaka} fillColor="rgba(255,0,0,0.5)" />
-        <Marker
-          coordinate={{ latitude: 23.8103, longitude: 90.4125 }}
-          title={"Dhaka, Bangladesh"}
-          description={"The capital of Bangladesh"}
-          pinColor={"blue"}
-        />
-      </MapView> */}
       <MapView style={styles.map} initialRegion={initialRegion}>
         <Marker
           coordinate={{ latitude: 23.8103, longitude: 90.4125 }}

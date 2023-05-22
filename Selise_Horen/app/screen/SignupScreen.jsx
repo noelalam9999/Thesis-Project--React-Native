@@ -16,6 +16,7 @@ import { set } from "react-native-reanimated";
 import { useNavigation } from "@react-navigation/native";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
+import { Linking } from "expo-linking";
 
 import * as AuthSession from "expo-auth-session";
 
@@ -114,6 +115,7 @@ const SignupScreen = ({ route }) => {
       );
 
       const user = await response.json();
+      conssole.log(user);
       setUserInfo(user);
       navigation.navigate("Home");
       //isLoggedIn(true);
@@ -122,9 +124,32 @@ const SignupScreen = ({ route }) => {
     }
   };
 
+  const handleDeepLink = async () => {
+    const url = await Linking.getInitialURL();
+    if (url) {
+      if (url.includes("myapp://")) {
+        const params = parseDeepLinkParams(url);
+
+        console.log("Deep link params:", params);
+
+        if (params.screen === "profile") {
+          navigation.navigate("Profile");
+        } else if (params.action === "share") {
+          shareContent(params.content);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleDeepLink();
+  }, []);
+
   return (
     <View style={styles.screen}>
-      <Text>LOGO</Text>
+      <Text style={{ fontSize: 24, fontWeight: "bold", marginTop: 10 }}>
+        Horen
+      </Text>
       <View style={styles.form}>
         <TextInput
           style={styles.input}

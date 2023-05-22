@@ -39,7 +39,7 @@ const LoginScreen = ({ navigation, route }) => {
   };
   return (
     <View style={styles.screen}>
-      <Text>LOGO</Text>
+      <Text style={{ fontSize: 24, fontWeight: "bold" }}>Horen</Text>
       <View style={styles.form}>
         <TextInput
           keyboardType="email-address"

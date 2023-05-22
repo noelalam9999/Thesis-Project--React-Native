@@ -66,7 +66,7 @@ const TabNavigator = () => {
           options={{
             tabBarIcon: ({ focused }) => (
               <Icon
-                name="bar-chart"
+                name="list-alt"
                 size={28}
                 color={focused ? "black" : "#F7CF47"}
               />
@@ -164,8 +164,6 @@ const AppNavigator = () => {
               headerTitleStyle: {
                 fontWeight: "bold",
                 color: "#F7CF47",
-                borderWidth: 1,
-                borderColor: "#F7CF47",
               },
               drawerLabelStyle: {
                 color: "#F7CF47",
@@ -261,6 +259,13 @@ const AppNavigator = () => {
           <Drawer.Screen
             name="Claim Device"
             options={{
+              drawerIcon: () => (
+                <MaterialIcons
+                  name="qr-code-scanner"
+                  size={24}
+                  color="#F7CF47"
+                />
+              ),
               headerStyle: {
                 backgroundColor: "#000000",
               },

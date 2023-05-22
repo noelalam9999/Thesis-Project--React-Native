@@ -176,7 +176,22 @@ const PurchaseDevice = () => {
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.order_info}>
-          <Text style={styles.details}>Order Details</Text>
+          <Text
+            style={{
+              padding: 3,
+              width: "35%",
+              fontSize: 18,
+              backgroundColor: "#000",
+              color: "#F7CF47",
+              fontWeight: "bold",
+              borderRadius: 5,
+              marginTop: -10,
+              marginLeft: -10,
+              marginBottom: 18,
+            }}
+          >
+            Order Details
+          </Text>
           <Text style={styles.text}>Quantity</Text>
           <TextInput
             style={styles.input}
@@ -477,12 +492,20 @@ const styles = StyleSheet.create({
 
   dropdownText: {
     color: "#333",
+
     fontSize: 16,
     fontWeight: "600",
   },
   details: {
+    padding: 3,
+    width: "45%",
     fontSize: 18,
+    backgroundColor: "#000",
+    color: "#F7CF47",
     fontWeight: "bold",
+    borderRadius: 1,
+    marginTop: -10,
+    marginLeft: -10,
     marginBottom: 18,
   },
 });
