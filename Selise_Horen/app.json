@@ -1,6 +1,5 @@
 {
   "expo": {
-    "scheme": "myapp",
     "name": "Selise_Horen",
     "slug": "Selise_Horen",
     "version": "1.0.0",
@@ -27,7 +26,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "budleIdentifier": "com.selise.horenmare"
+      "bundleIdentifier": "com.selise.horenmare"
     },
     "android": {
       "package": "com.selise.horenmare",
