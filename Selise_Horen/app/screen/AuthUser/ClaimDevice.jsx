@@ -21,6 +21,7 @@ import angry from "../../../assets/image/angry.png";
 import party from "../../../assets/image/party-popper.png";
 import road from "../../../assets/image/road.png";
 import hour from "../../../assets/image/24-hours.png";
+import sad from "../../../assets/image/sad.png";
 
 import { LineChart } from "react-native-chart-kit";
 const data = [
@@ -79,6 +80,8 @@ const ClaimDevice = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [claimedAlertVisible, setClaimedAlertVisible] = useState(false);
+  const [scannedAlertVisible, setScannedAlertVisible] = useState(false);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -88,6 +91,12 @@ const ClaimDevice = () => {
 
     getBarCodeScannerPermissions();
   }, []);
+
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     setScanned(false);
+  //   }
+  // }, [isFocused]);
 
   const handleBarCodeScanned = async ({ type, data }) => {
     try {
@@ -103,7 +112,7 @@ const ClaimDevice = () => {
       const deviceInfo = await deviceInfoResponse.json();
 
       if (deviceInfo.user_id) {
-        alert("Device already claimed");
+        setClaimedAlertVisible(true);
       } else {
         const updateDeviceInfo = { ...deviceInfo, user_id: userId };
         const updateResult = await fetch(
@@ -117,9 +126,8 @@ const ClaimDevice = () => {
           }
         );
         const result = await updateResult.json();
-        console.log("Device updated:", result);
 
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+        setScannedAlertVisible(true);
       }
     } catch (error) {
       console.log(error);
@@ -136,14 +144,38 @@ const ClaimDevice = () => {
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
         style={StyleSheet.absoluteFillObject}
       />
+
       {scanned && (
-        <View>
-          <TouchableOpacity
-            style={styles.statsButton}
-            onPress={() => handleSeeStats()}
-          >
-            <Text style={styles.statsButtonText}>See Stats</Text>
-          </TouchableOpacity>
+        <View style={styles.wrapBox}>
+          {claimedAlertVisible && (
+            <>
+              <Image source={sad} style={{ height: 30, width: 30 }}></Image>
+              <Text style={styles.alertText}>Oops, device already claimed</Text>
+            </>
+          )}
+          {scannedAlertVisible && (
+            <>
+              <Image source={party} style={{ height: 30, width: 30 }}></Image>
+              <Text style={styles.alertText}>
+                Congratulation,Your device has been claimed.
+              </Text>
+            </>
+          )}
+
+          <View style={{ flexDirection: "row", marginBottom: 10, gap: 15 }}>
+            <TouchableOpacity
+              style={styles.statsButton}
+              onPress={handleSeeStats}
+            >
+              <Text style={styles.statsButtonText}>See Stats</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.scanAgainButton}
+              onPress={() => setScanned(false)}
+            >
+              <Text style={styles.scanAgainButtonText}>Tap to Scan Again</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
       <Modal animationType="slide" visible={modalVisible}>
@@ -227,18 +259,47 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
   },
-  statsButton: {
-    backgroundColor: "#F7CF47",
-    alignSelf: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 12,
+
+  wrapBox: {
+    backgroundColor: "#000",
+    borderRadius: 10,
+    padding: 20,
     marginTop: 20,
+    alignItems: "center",
+  },
+  statsButton: {
+    width: 100,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F7CF47",
+    borderRadius: 15,
+    marginBottom: 10,
   },
   statsButtonText: {
-    color: "#000000",
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
+    color: "#000",
+  },
+  scanAgainButton: {
+    width: 150,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F7CF47",
+    borderRadius: 15,
+  },
+  scanAgainButtonText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#000",
+  },
+  alertText: {
+    marginTop: 10,
+    marginBottom: 15,
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#F7CF47",
   },
   modalContainer: {
     alignItems: "center",
@@ -312,13 +373,13 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     marginTop: 80,
-    // backgroundColor: "#F7CF47",
-    // paddingVertical: 10,
-    // paddingHorizontal: 20,
-    // borderRadius: 8,
+    backgroundColor: "#000",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
   },
   closeButtonText: {
-    color: "#000",
+    color: "#F7CF47",
     fontSize: 16,
     fontWeight: "bold",
   },

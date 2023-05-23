@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -20,128 +20,10 @@ import road from "../../../assets/image/road.png";
 import hour from "../../../assets/image/24-hours.png";
 import ClaimDevice from "./ClaimDevice";
 import { LineChart } from "react-native-chart-kit";
-
-const vehicles = [
-  {
-    id: 1,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-    name: "Honda",
-    device_configure: "configured",
-  },
-  {
-    id: 2,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-    name: "Toyota",
-    device_configure: "configured",
-  },
-  {
-    id: 3,
-
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Ford",
-  },
-  {
-    id: 4,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Chevrolet",
-  },
-  {
-    id: 5,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Tesla",
-  },
-  {
-    id: 6,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Nissan",
-  },
-  {
-    id: 7,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Mazda",
-  },
-  {
-    id: 8,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Subaru",
-  },
-  {
-    id: 9,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Jeep",
-  },
-  {
-    id: 10,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Audi",
-  },
-  {
-    id: 11,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "BMW",
-  },
-  {
-    id: 12,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Mercedes-Benz",
-  },
-  {
-    id: 13,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Volkswagen",
-  },
-  {
-    id: 14,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Ferrari",
-  },
-  {
-    id: 15,
-    Ru_id: "123456",
-    qr_code: "abcd1234",
-
-    device_configure: "configured",
-    name: "Lamborghini",
-  },
-];
+import config from "../../config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import SelectDropdown from "react-native-select-dropdown";
+import { Picker } from "@react-native-picker/picker";
 
 const data = [
   {
@@ -194,10 +76,31 @@ const data = [
     legendFontSize: 15,
   },
 ];
+const selectData = ["Highest Device List", "Lowest Device List"];
 
 const DeviceList = ({ navigation }) => {
+  const [devices, setDevices] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
+  const [selectedSortOption, setSelectedSortOption] = useState(null);
+
+  useEffect(() => {
+    const fetchDevices = async () => {
+      try {
+        const userId = await AsyncStorage.getItem("userId");
+        const response = await fetch(
+          `${config.Device_URL}/device/user_id/${userId}`
+        );
+        const data = await response.json();
+        //console.log(data);
+        setDevices(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchDevices();
+  }, []);
 
   const handleVehiclePress = (vehicle) => {
     setSelectedVehicle(vehicle);
@@ -208,18 +111,32 @@ const DeviceList = ({ navigation }) => {
     setSelectedVehicle(null);
     setModalVisible(false);
   };
+  const handleSortOptionChange = (value) => {
+    setSelectedSortOption(value);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.claimedDevice}>
-        <TouchableOpacity style={styles.searchButton}>
-          <MaterialIcons
-            name="search"
-            size={24}
-            color="#000000"
-            style={styles.searchIcon}
-          />
-          <TextInput>Search Device</TextInput>
-        </TouchableOpacity>
+        <SelectDropdown
+          data={selectData}
+          buttonStyle={{
+            backgroundColor: "#000000",
+            borderRadius: 25,
+            borderWidth: 1,
+            borderColor: "#000000",
+            marginTop: 20,
+            width: "45%",
+          }}
+          buttonTextStyle={{ color: "#F7CF47", fontSize: 16 }}
+          dropdownStyle={{ backgroundColor: "#F7CF47", borderRadius: 5 }}
+          dropdownTextStyle={{ fontWeight: "bold", textAlign: "center" }}
+          defaultButtonText="Sort Device List"
+          dropdownIconPosition="right"
+          dropdownIcon={
+            <MaterialIcons name="arrow-drop-down" size={30} color="#F7CF47" />
+          }
+        />
+
         <TouchableOpacity onPress={() => navigation.navigate("Claim Device")}>
           {/* <Text style={styles.claimedText}>Claim Device</Text> */}
           <MaterialIcons name="qr-code-scanner" size={40} color="#000" />
@@ -227,13 +144,13 @@ const DeviceList = ({ navigation }) => {
       </View>
       <ScrollView style={styles.scrollView}>
         <View style={styles.vehiclesContainer}>
-          {vehicles.map((vehicle) => (
+          {devices.map((device) => (
             <TouchableOpacity
-              key={vehicle.id}
+              key={device.id}
               style={styles.vehicle}
-              onPress={() => handleVehiclePress(vehicle)}
+              onPress={() => handleVehiclePress(device)}
             >
-              <Text style={styles.name}>{vehicle.name}</Text>
+              <Text style={styles.name}>{device.RU_id}</Text>
               <View style={styles.infoContainer}>
                 <Text style={styles.infoText}>
                   <Image
@@ -256,9 +173,9 @@ const DeviceList = ({ navigation }) => {
         </View>
       </ScrollView>
       <Modal animationType="slide" visible={modalVisible}>
-        <View style={styles.modalContainer}>
+        <View style={styles.modalContainer} blu>
           <Text style={styles.modalText}>
-            {selectedVehicle ? selectedVehicle.name : ""}
+            {selectedVehicle ? selectedVehicle.RU_id : ""}
           </Text>
           <View style={styles.detailsContainer}>
             {/* <Text style={styles.detailsText}>QR Code: random qr code</Text>
@@ -267,7 +184,7 @@ const DeviceList = ({ navigation }) => {
             </Text> */}
           </View>
           <View style={styles.boxContainer}>
-            <View style={styles.boxRow}>
+            {/* <View style={styles.boxRow}>
               <View style={styles.box}>
                 <Image source={angry} style={styles.icon} />
                 <Text style={styles.boxText}>Too much noisy Device</Text>
@@ -276,7 +193,7 @@ const DeviceList = ({ navigation }) => {
                 <Image source={party} style={styles.icon} />
                 <Text style={styles.boxText}>Your device top rank</Text>
               </View>
-            </View>
+            </View> */}
             <View style={styles.boxRow}>
               <View style={styles.box}>
                 <Image source={road} style={styles.icon} />
@@ -302,7 +219,7 @@ const DeviceList = ({ navigation }) => {
                 },
               ],
             }}
-            width={Dimensions.get("window").width}
+            width={300}
             height={220}
             chartConfig={{
               backgroundColor: "#F7CF47",
@@ -408,12 +325,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#F7CF47",
-    //borderRadius: 10,
-    width: Dimensions.get("window").width,
-    height: "100%",
+    borderRadius: 10,
+    // width: Dimensions.get("window").width,
+    width: "95%",
+    height: "70%",
     // marginHorizontal: "10%",
     // paddingHorizontal: 20,
-    marginLeft: -20,
+    marginLeft: 10,
     marginBottom: -40,
 
     elevation: 5,
@@ -423,13 +341,13 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    shadowRadius: 5,
+    shadowRadius: 4,
   },
 
   modalText: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginTop: 10,
   },
   detailsContainer: {
     marginBottom: 20,
@@ -453,7 +371,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F7CF47",
     justifyContent: "center",
     borderRadius: 15,
-    padding: 10,
+    padding: 8,
     shadowColor: "#000",
     width: "45%",
     shadowOffset: {
@@ -465,9 +383,9 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   icon: {
-    width: 30,
-    height: 30,
-    marginBottom: 10,
+    width: 20,
+    height: 20,
+    marginTop: 5,
   },
   boxText: {
     flexDirection: "column",
@@ -476,14 +394,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   closeButton: {
-    marginTop: 80,
-    // backgroundColor: "#F7CF47",
-    // paddingVertical: 10,
-    // paddingHorizontal: 20,
-    // borderRadius: 8,
+    marginTop: 5,
+    backgroundColor: "#000",
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    borderRadius: 8,
   },
   closeButtonText: {
-    color: "#000",
+    color: "#F7CF47",
     fontSize: 16,
     fontWeight: "bold",
   },

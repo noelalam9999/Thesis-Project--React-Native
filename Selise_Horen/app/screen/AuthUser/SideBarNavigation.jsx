@@ -1,6 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from "@react-navigation/drawer";
 import { StatusBar } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import HeatMap from "./HeatMapscreen";
@@ -12,7 +17,6 @@ import SuccessScreen from "./SuccessScreen";
 import HomeScreen from "./HomeScreen";
 import LoginScreen from "../LoginScreen";
 import SignupScreen from "../SignupScreen";
-import { ECharts } from "react-native-echarts-wrapper";
 
 import LeaderboardScreen from "./leaderboardScreen";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -94,6 +98,7 @@ const TabNavigator = () => {
     </PaperProvider>
   );
 };
+
 const AppNavigator = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -233,7 +238,6 @@ const AppNavigator = () => {
             }}
             component={ProfileScreen}
           />
-
           <Drawer.Screen
             name="Purchase-Device"
             options={{
@@ -255,7 +259,6 @@ const AppNavigator = () => {
             }}
             component={PurchaseDevice}
           />
-
           <Drawer.Screen
             name="Claim Device"
             options={{

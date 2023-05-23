@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import AppNavigator from "./screen/AuthUser/SideBarNavigation";
 import LoginSignUpNav from "./screen/LoginSignUpNav";
 import { View } from "react-native";
-
+// export const GlobalContext
 const App = () => {
   // const [loggedIn, setLoggedIn] = useState(false);
 

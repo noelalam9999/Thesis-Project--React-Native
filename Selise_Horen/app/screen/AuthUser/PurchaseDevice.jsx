@@ -178,13 +178,15 @@ const PurchaseDevice = () => {
         <View style={styles.order_info}>
           <Text
             style={{
-              padding: 3,
+              paddingLeft: 9,
               width: "35%",
               fontSize: 18,
               backgroundColor: "#000",
               color: "#F7CF47",
               fontWeight: "bold",
-              borderRadius: 5,
+              borderTopLeftRadius: 5,
+              borderBottomRightRadius: 5,
+              //borderRadius: 5,
               marginTop: -10,
               marginLeft: -10,
               marginBottom: 18,
@@ -249,92 +251,89 @@ const PurchaseDevice = () => {
             />
           ) : null}
 
-          <Text
-            style={styles.text}
-            onChangeText={setZone}
-            placeholder="zone*"
-            value={zone}
-          >
-            What is your zone?
-          </Text>
-          {zones ? (
-            <SelectDropdown
-              data={zones.map((zone) => ({
-                label: zone.zone_name,
-                value: zone.zone_id,
-              }))}
-              onSelect={(selectedZone) => setZone(selectedZone)}
-              defaultButtonText="Select zone"
-              buttonTextAfterSelection={(selectedItem) => selectedItem.label}
-              rowTextForSelection={(item) => item.label}
-              buttonStyle={styles.input}
-              buttonTextStyle={styles.dropdownText}
-              renderDropdownIcon={() => (
-                <MaterialIcons
-                  name="keyboard-arrow-down"
-                  size={24}
-                  color="#333"
-                />
-              )}
-            />
+          {city && zones ? (
+            <View>
+              <Text style={styles.text}>What is your zone?</Text>
+              <SelectDropdown
+                data={zones.map((zone) => ({
+                  label: zone.zone_name,
+                  value: zone.zone_id,
+                }))}
+                onSelect={(selectedZone) => setZone(selectedZone)}
+                defaultButtonText="Select zone"
+                buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                rowTextForSelection={(item) => item.label}
+                buttonStyle={styles.input}
+                buttonTextStyle={styles.dropdownText}
+                renderDropdownIcon={() => (
+                  <MaterialIcons
+                    name="keyboard-arrow-down"
+                    size={24}
+                    color="#333"
+                  />
+                )}
+              />
+            </View>
           ) : null}
 
-          <Text
-            style={styles.text}
-            onChangeText={setArea}
-            placeholder="Area"
-            value={area}
-          >
-            Which area do you reside in?
-          </Text>
-          {areas ? (
-            <SelectDropdown
-              data={areas.map((area) => ({
-                label: area.area_name,
-                value: area.area_id,
-              }))}
-              onSelect={(selectedArea) => setArea(selectedArea)}
-              defaultButtonText="Select area"
-              buttonTextAfterSelection={(selectedItem) => selectedItem.label}
-              rowTextForSelection={(item) => item.label}
-              buttonStyle={styles.input}
-              buttonTextStyle={styles.dropdownText}
-              renderDropdownIcon={() => (
-                <MaterialIcons
-                  name="keyboard-arrow-down"
-                  size={24}
-                  color="#333"
-                />
-              )}
-            />
+          {zone && areas ? (
+            <View>
+              <Text style={styles.text}>Which area do you reside in?</Text>
+              <SelectDropdown
+                data={areas.map((area) => ({
+                  label: area.area_name,
+                  value: area.area_id,
+                }))}
+                onSelect={(selectedArea) => setArea(selectedArea)}
+                defaultButtonText="Select area"
+                buttonTextAfterSelection={(selectedItem) => selectedItem.label}
+                rowTextForSelection={(item) => item.label}
+                buttonStyle={styles.input}
+                buttonTextStyle={styles.dropdownText}
+                renderDropdownIcon={() => (
+                  <MaterialIcons
+                    name="keyboard-arrow-down"
+                    size={24}
+                    color="#333"
+                  />
+                )}
+              />
+              {/* <Text style={styles.text}>Write down your complete address</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={setAddress}
+                placeholder="Address"
+                value={address}
+              /> */}
+            </View>
           ) : null}
-          <Text style={styles.text}>Write down your complete address </Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={setAddress}
-            placeholder="Address"
-            value={address}
-          />
-        </View>
-
-        <TouchableOpacity
-          style={[styles.button, isValid ? null : { opacity: 0.5 }]}
-          onPress={handleSubmit}
-          disabled={!isValid}
-        >
-          {isloaderModal ? (
-            <ActivityIndicator size="large" color="#F7CF47" />
-          ) : (
-            <Text
-              style={styles.buttonText}
-              onChangeText={setPrice}
-              value={price}
-            >
-              Pay now | BDT{" "}
-            </Text>
+          {area && (
+            <View>
+              <Text style={styles.text}>Write down your complete address</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={setAddress}
+                placeholder="Address"
+                value={address}
+              />
+            </View>
           )}
-        </TouchableOpacity>
+        </View>
       </ScrollView>
+      <TouchableOpacity
+        style={[styles.button, isValid ? null : { opacity: 0.5 }]}
+        onPress={handleSubmit}
+        disabled={!isValid}
+      >
+        {isloaderModal ? (
+          <ActivityIndicator size="large" color="#F7CF47" />
+        ) : (
+          <Text style={styles.buttonText} onChangeText={setPrice} value={price}>
+            Pay now | BDT{" "}
+          </Text>
+        )}
+      </TouchableOpacity>
+
       <Modal visible={showModal} animationType="slide">
         <View style={styles.modal}>
           <Text style={styles.modalText}>
@@ -375,7 +374,7 @@ const styles = StyleSheet.create({
   },
   order_info: {
     marginTop: 15,
-    height: "30%",
+    height: "35%",
     width: "90%",
     padding: 10,
     marginLeft: 25,
@@ -391,7 +390,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   pathao_info: {
-    height: "60%",
+    height: "70%",
     width: "90%",
     padding: 10,
     marginTop: 15,
@@ -422,14 +421,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    marginLeft: 100,
+    marginLeft: 120,
     width: "40%",
-    height: "30%",
+    //height: "30%",
     backgroundColor: "#000",
     padding: 15,
     borderRadius: 5,
-    marginTop: 10,
-    //marginBottom: 50,
+    marginTop: 15,
+    marginBottom: 20,
   },
   buttonText: {
     color: "#F7CF47",
@@ -498,12 +497,14 @@ const styles = StyleSheet.create({
   },
   details: {
     padding: 3,
+    paddingLeft: 9,
     width: "45%",
     fontSize: 18,
     backgroundColor: "#000",
     color: "#F7CF47",
     fontWeight: "bold",
-    borderRadius: 1,
+    borderTopLeftRadius: 5,
+    borderBottomRightRadius: 5,
     marginTop: -10,
     marginLeft: -10,
     marginBottom: 18,

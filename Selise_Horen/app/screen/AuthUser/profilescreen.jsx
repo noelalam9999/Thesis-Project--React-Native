@@ -92,8 +92,7 @@ const ProfileScreen = ({ navigation, route }) => {
               marginLeft: 60,
             }}
           >
-            {/* <Image source={Medal} style={{ width: 25, height: 30 }} /> */}
-            <Text style={{ fontSize: 15, marginLeft: 5 }}>
+            <Text style={{ fontSize: 15, marginLeft: 27 }}>
               Number of Badge Collections
             </Text>
           </View>
@@ -121,21 +120,72 @@ const ProfileScreen = ({ navigation, route }) => {
               marginVertical: 8,
               borderRadius: 16,
               marginTop: 20,
-              marginLeft: -45,
+              marginLeft: -20,
               marginRight: 10,
             }}
             renderDotContent={({ x, y, index }) => {
-              if (index === 2) {
+              if (index === 8) {
                 return (
-                  <Image source={bronze} style={{ width: 20, height: 20 }} />
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: y - 20,
+                      left: x - 15,
+                      width: 25,
+                      height: 25,
+                    }}
+                  >
+                    <Image
+                      source={bronze}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        resizeMode: "contain",
+                      }}
+                    />
+                  </View>
+                );
+              } else if (index === 3) {
+                return (
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: y - 15,
+                      left: x - 10,
+                      width: 25,
+                      height: 25,
+                    }}
+                  >
+                    <Image
+                      source={silver}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        resizeMode: "contain",
+                      }}
+                    />
+                  </View>
                 );
               } else if (index === 5) {
                 return (
-                  <Image source={silver} style={{ width: 20, height: 20 }} />
-                );
-              } else if (index === 8) {
-                return (
-                  <Image source={gold} style={{ width: 20, height: 20 }} />
+                  <View
+                    style={{
+                      position: "absolute",
+                      top: y - 15,
+                      left: x - 10,
+                      width: 25,
+                      height: 25,
+                    }}
+                  >
+                    <Image
+                      source={gold}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        resizeMode: "contain",
+                      }}
+                    />
+                  </View>
                 );
               }
               return null;
@@ -255,7 +305,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginHorizontal: 5,
     marginTop: 120,
-    marginBottom: 40,
+    marginBottom: 80,
   },
   editButton: {
     flexDirection: "row",

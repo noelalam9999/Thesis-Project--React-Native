@@ -135,38 +135,38 @@ const HomeScreen = () => {
             </View>
             <View style={styles.box}>
               <Image source={hour} style={{ width: 30, height: 30 }}></Image>
-              <Text style={styles.boxText}>0.45% horn per 2 hour</Text>
+              <Text style={styles.boxText}>0.45% horn per hour</Text>
             </View>
           </View>
         </View>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.button} onPress={handlePress}>
+            <Text
+              style={[
+                styles.buttonText,
+                isYearView ? styles.activeButtonText : null,
+              ]}
+            >
+              {isYearView && "Year View"}
+              {isMonthView && "Month View"}
+              {!isYearView && !isMonthView && "Week View"}
+            </Text>
+          </TouchableOpacity>
+
+          <SelectDropdown
+            data={Devices}
+            onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index);
+            }}
+            buttonStyle={styles.dropdownButton}
+            buttonTextStyle={styles.dropdownButtonText}
+            dropdownStyle={styles.dropdown}
+            dropdownTextStyle={styles.dropdownText}
+            defaultButtonText="Device change"
+          />
+        </View>
 
         <View style={styles.containerWrapper}>
-          <View style={styles.container}>
-            <TouchableOpacity style={styles.button} onPress={handlePress}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  isYearView ? styles.activeButtonText : null,
-                ]}
-              >
-                {isYearView && "Year View"}
-                {isMonthView && "Month View"}
-                {!isYearView && !isMonthView && "Week View"}
-              </Text>
-            </TouchableOpacity>
-
-            <SelectDropdown
-              data={Devices}
-              onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index);
-              }}
-              buttonStyle={styles.dropdownButton}
-              buttonTextStyle={styles.dropdownButtonText}
-              dropdownStyle={styles.dropdown}
-              dropdownTextStyle={styles.dropdownText}
-              defaultButtonText="Device change"
-            />
-          </View>
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
@@ -297,6 +297,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 39,
     marginTop: 20,
+    marginBottom: 15,
   },
   button: {
     //marginLeft: 5,
@@ -400,13 +401,14 @@ const styles = StyleSheet.create({
     marginTop: 60,
 
     marginBottom: 10,
-    marginLeft: 10,
+    marginLeft: 5,
   },
   boxContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 10,
-    gap: 10,
+    gap: -5,
+    //gap: 5,
   },
   boxRow: {
     flexDirection: "row",
@@ -420,7 +422,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: "#F7CF47",
     width: "45%",
-
+    marginLeft: 8,
+    marginRight: 12,
     alignItems: "center",
     elevation: 6,
     shadowColor: "#000",
