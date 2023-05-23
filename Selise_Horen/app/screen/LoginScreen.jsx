@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {
   View,
@@ -9,10 +9,13 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthService from "../services/Auth.service";
+import * as Google from 'expo-auth-session/providers/google';
 
 const LoginScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [accessToken, setAccessToken] = useState()
 
   function showRegister() {
     navigation.navigate("SignUp");

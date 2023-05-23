@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,17 +6,17 @@ import {
   StyleSheet,
   ScrollView,
   Image,
-} from "react-native";
-import { LineChart } from "react-native-chart-kit";
-import { Dimensions } from "react-native";
-import SelectDropdown from "react-native-select-dropdown";
-import { VictoryScatter, VictoryChart } from "victory-native";
-import badge from "../../../assets/image/black-badge.png";
-import noise from "../../../assets/image/noise.png";
-import pollution from "../../../assets/image/noise-pollution.png";
-import road from "../../../assets/image/road.png";
-import hour from "../../../assets/image/24-hours.png";
-import { ECharts } from "react-native-echarts-wrapper";
+} from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
+import { Dimensions } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
+import { VictoryScatter, VictoryChart } from 'victory-native';
+import badge from '../../../assets/image/black-badge.png';
+import noise from '../../../assets/image/noise.png';
+import pollution from '../../../assets/image/noise-pollution.png';
+import road from '../../../assets/image/road.png';
+import hour from '../../../assets/image/24-hours.png';
+import { ECharts } from 'react-native-echarts-wrapper';
 const chartData1 = [
   { x: 1, y: 50 },
   { x: 5, y: 30 },
@@ -26,13 +26,13 @@ const chartData1 = [
   { x: 25, y: 87 },
 ];
 const Devices = [
-  "Device Change",
-  "Toyota Camry",
-  "Honda Civic",
-  "Ford Mustang",
-  "Chevrolet Corvette",
-  "BMW M3",
-  "Audi A4",
+  'Device Change',
+  'Toyota Camry',
+  'Honda Civic',
+  'Ford Mustang',
+  'Chevrolet Corvette',
+  'BMW M3',
+  'Audi A4',
 ];
 
 const data = new Array(200).fill(0).reduce(
@@ -74,16 +74,16 @@ const HomeScreen = () => {
   const level = Math.ceil(progress * 10);
   const option = {
     xAxis: {
-      type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     },
     yAxis: {
-      type: "value",
+      type: 'value',
     },
     series: [
       {
         data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: "line",
+        type: 'line',
       },
     ],
   };
@@ -114,8 +114,7 @@ const HomeScreen = () => {
             <View style={styles.box}>
               <Image
                 source={pollution}
-                style={{ width: 30, height: 30 }}
-              ></Image>
+                style={{ width: 30, height: 30 }}></Image>
               <Text style={styles.boxText}>
                 You are in top 5% of sound polluter
               </Text>
@@ -140,17 +139,16 @@ const HomeScreen = () => {
         </View>
 
         <View style={styles.containerWrapper}>
-          <View style={styles.container}>
+          <View style={styles.flexContainer}>
             <TouchableOpacity style={styles.button} onPress={handlePress}>
               <Text
                 style={[
                   styles.buttonText,
                   isYearView ? styles.activeButtonText : null,
-                ]}
-              >
-                {isYearView && "Year View"}
-                {isMonthView && "Month View"}
-                {!isYearView && !isMonthView && "Week View"}
+                ]}>
+                {isYearView && 'Year View'}
+                {isMonthView && 'Month View'}
+                {!isYearView && !isMonthView && 'Week View'}
               </Text>
             </TouchableOpacity>
 
@@ -167,8 +165,7 @@ const HomeScreen = () => {
             />
           </View>
           <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-          >
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text style={{ fontSize: 15 }}>Number of Horns played per day</Text>
           </View>
           {/* <LineChart
@@ -208,11 +205,10 @@ const HomeScreen = () => {
           <View
             style={{
               flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
+              justifyContent: 'center',
+              alignItems: 'center',
               marginTop: 20,
-            }}
-          >
+            }}>
             <Text style={{ fontSize: 15 }}>Global Ranking</Text>
           </View>
           <LineChart
@@ -226,17 +222,17 @@ const HomeScreen = () => {
                 },
               ],
             }}
-            width={Dimensions.get("window").width}
+            width={Dimensions.get('window').width}
             height={220}
             yAxisSuffix="%"
             yAxisInterval={10}
             chartConfig={{
-              backgroundColor: "#F7CF47",
-              backgroundGradientFrom: "#F7CF47",
-              backgroundGradientTo: "#F7CF47",
+              backgroundColor: '#F7CF47',
+              backgroundGradientFrom: '#F7CF47',
+              backgroundGradientTo: '#F7CF47',
               decimalPlaces: 2,
-              xAxisLabel: "Time",
-              yAxisLabel: "Decibel",
+              xAxisLabel: 'Time',
+              yAxisLabel: 'Decibel',
 
               color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
@@ -260,7 +256,7 @@ const HomeScreen = () => {
               <VictoryScatter
                 data={data}
                 size={4}
-                style={{ data: { fill: "black" } }}
+                style={{ data: { fill: 'black' } }}
               />
             </VictoryChart>
           </View>
@@ -272,115 +268,117 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: "#F7CF47",
+    backgroundColor: '#F7CF47',
   },
   container: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginHorizontal: 20,
     marginTop: 20,
   },
+  flexContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'center',
+  },
   title: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginLeft: 39,
     marginTop: 20,
   },
   button: {
-    backgroundColor: "#000000",
-    width: "30%",
-    paddingVertical: 8,
+    backgroundColor: '#000000',
+    width: '50%',
+    paddingVertical: 2,
     paddingHorizontal: 5,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: "#000000",
-    marginTop: 20,
-    marginLeft: 5,
-    marginRight: 40,
+    borderColor: '#000000',
+    height: '30px',
   },
   dropdownButton: {
     paddingVertical: 2,
-    backgroundColor: "#000000",
+    backgroundColor: '#000000',
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: "#000000",
+    borderColor: '#000000',
     marginTop: 20,
-    width: "40%",
-    // marginLeft: 20,
-    // marginRight: 40,
+    width: '50%',
   },
   dropdownButtonText: {
-    color: "#F7CF47",
+    color: '#F7CF47',
     fontSize: 16,
   },
   activeButton: {
-    backgroundColor: "#000000",
-    borderColor: "#000000",
+    backgroundColor: '#000000',
+    borderColor: '#000000',
   },
   buttonText: {
-    color: "#F7CF47",
+    color: '#F7CF47',
     // fontWeight: "bold",
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 16,
   },
   activeButtonText: {
-    color: "#F7CF47",
+    color: '#F7CF47',
   },
 
   dropdown: {
-    backgroundColor: "#F7CF47",
+    backgroundColor: '#F7CF47',
     borderRadius: 5,
   },
   dropdownText: {
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: 'bold',
+    textAlign: 'center',
     // padding: 10,
   },
   imageContainer: {
     marginTop: 5,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   badgeImage: {
     width: 60,
     height: 80,
-    resizeMode: "contain",
+    resizeMode: 'contain',
   },
   title: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginLeft: 8,
   },
   progressBarContainer: {
     marginLeft: 68,
-    width: "70%",
+    width: '70%',
     height: 20,
     borderWidth: 1,
-    borderColor: "#000",
-    backgroundColor: "#000",
+    borderColor: '#000',
+    backgroundColor: '#000',
     borderRadius: 30,
-    flexDirection: "row",
-    overflow: "hidden",
+    flexDirection: 'row',
+    overflow: 'hidden',
   },
   level: {
     flex: 1,
-    height: "100%",
+    height: '100%',
     marginRight: 1.5,
   },
   activeLevel: {
-    backgroundColor: "#F9D866",
-    position: "relative",
+    backgroundColor: '#F9D866',
+    position: 'relative',
   },
   inactiveLevel: {
-    backgroundColor: "#F7CF47",
-    position: "relative",
+    backgroundColor: '#F7CF47',
+    position: 'relative',
   },
   levelText: {
     fontSize: 14,
     marginTop: 8,
-    textAlign: "center",
-    fontWeight: "bold",
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   wrapContainer: {
     marginTop: 60,
@@ -389,24 +387,24 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   boxContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 10,
     gap: 10,
   },
   box: {
     paddingVertical: 30,
     //borderWidth: 1,
-    borderColor: "#000",
+    borderColor: '#000',
     borderRadius: 15,
     padding: 10,
     marginBottom: 10,
-    backgroundColor: "#F7CF47",
-    width: "45%",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#F7CF47',
+    width: '45%',
+    justifyContent: 'center',
+    alignItems: 'center',
     elevation: 6,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -415,19 +413,19 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   boxText: {
-    flexDirection: "column",
+    flexDirection: 'column',
     fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#000",
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#000',
   },
   containerWrapper: {
     //flex: 1,
-    backgroundColor: "#F7CF47",
+    backgroundColor: '#F7CF47',
     margin: 10,
 
     borderRadius: 8,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
