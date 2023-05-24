@@ -5,6 +5,6 @@ export default Config = {
     Signals: "",
   },
   API_URL: "https://order-service.fly.dev", //sales server
-  USER_URL: "https://f8a1-113-11-37-36.ngrok-free.app",
+  USER_URL: "https://1f58-113-11-37-36.ngrok-free.app",
   Device_URL: "https://device-service.fly.dev",
 };

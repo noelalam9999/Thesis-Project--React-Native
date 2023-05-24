@@ -23,7 +23,7 @@ import { LineChart } from "react-native-chart-kit";
 import config from "../../config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SelectDropdown from "react-native-select-dropdown";
-import { Picker } from "@react-native-picker/picker";
+import { useFocusEffect } from "@react-navigation/native";
 
 const data = [
   {
@@ -84,23 +84,24 @@ const DeviceList = ({ navigation }) => {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [selectedSortOption, setSelectedSortOption] = useState(null);
 
-  useEffect(() => {
-    const fetchDevices = async () => {
-      try {
-        const userId = await AsyncStorage.getItem("userId");
-        const response = await fetch(
-          `${config.Device_URL}/device/user_id/${userId}`
-        );
-        const data = await response.json();
-        //console.log(data);
-        setDevices(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchDevices = async () => {
+        try {
+          const userId = await AsyncStorage.getItem("userId");
+          const response = await fetch(
+            `${config.Device_URL}/device/user_id/${userId}`
+          );
+          const data = await response.json();
+          setDevices(data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
-    fetchDevices();
-  }, []);
+      fetchDevices();
+    }, [])
+  );
 
   const handleVehiclePress = (vehicle) => {
     setSelectedVehicle(vehicle);

@@ -35,9 +35,10 @@ const SignupScreen = ({ route }) => {
   const [userInfo, setUserInfo] = useState(null);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId:
-      "817453303535-urc0dcloheraap8nt91abpmcdigi74ec.apps.googleusercontent.com",
-    redirectUri: "http://localhost:19000",
+    androidClientId:
+      "386842126754-e4gmmlhdbkvk5bgv14jivo6t54jf64vf.apps.googleusercontent.com",
+    expoClientId:
+      "386842126754-qnvsobkqe6dq59m3ejcfjnpb3ssmlhnk.apps.googleusercontent.com",
   });
 
   const { isLoggedIn } = route.params;
