@@ -25,7 +25,6 @@
     "expo": "~48.0.15",
     "expo-barcode-scanner": "~12.3.2",
     "expo-cli": "^6.3.7",
-    "expo-constants": "~14.2.1",
     "expo-image-picker": "~14.1.1",
     "expo-linear-gradient": "~12.1.2",
     "expo-status-bar": "~1.4.4",
@@ -57,11 +56,13 @@
     "react-native-web": "^0.18.12",
     "react-native-webview": "^12.0.2",
     "victory-native": "^36.6.10",
-    "expo-auth-session": "~4.0.3",
     "expo-crypto": "~12.2.1",
     "expo-web-browser": "~12.1.1",
     "undefined": "expo-auth-session/providers/google",
-    "expo-linking": "~4.0.1"
+    "expo-linking": "~4.0.1",
+    "expo-constants": "~14.2.1",
+    "expo-auth-session": "~4.0.3",
+    "expo-random": "~13.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
