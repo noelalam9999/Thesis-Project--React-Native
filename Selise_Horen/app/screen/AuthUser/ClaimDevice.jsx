@@ -91,16 +91,11 @@ const ClaimDevice = () => {
         setHasPermission(status === "granted");
       };
 
-<<<<<<< HEAD
     getBarCodeScannerPermissions();
-  }, []);
+  }, [])
+  )
 
   
-=======
-      getBarCodeScannerPermissions();
-    }, [])
-  );
->>>>>>> df21664dd5351e409c0835c01309704eaf5a94e9
 
   const handleBarCodeScanned = async ({ type, data }) => {
     try {

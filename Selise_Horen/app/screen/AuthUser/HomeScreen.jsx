@@ -112,7 +112,7 @@ const HomeScreen = () => {
       if (devices.length>0) {
         const socket = io('https://7431-113-11-37-36.ngrok-free.app', {
           query: {
-            deviceRUid: "BUS_03",
+            deviceRUid: devices[0].deviceRUid,
           },
         });
   
@@ -123,8 +123,8 @@ const HomeScreen = () => {
     React.useEffect(() => {
       if (socket) {
         socket.on('newSignal', (data) => {
-          console.log(data)
-          setMessage(data);
+          
+          
         });
       }
     }, [socket]);
@@ -257,7 +257,7 @@ const HomeScreen = () => {
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
             <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-              Number of Horns played per day {message}
+              Number of Horns played per day
             </Text>
           </View>
           {

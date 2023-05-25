@@ -31,8 +31,6 @@ import { useEffect, useState } from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import ClaimDevice from "./ClaimDevice";
 import { TouchableOpacity } from "react-native";
-import EditProfile from "./EditProfile";
-import DeviceDetail from "./DeviceDetails";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
