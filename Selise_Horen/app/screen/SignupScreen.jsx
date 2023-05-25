@@ -33,6 +33,7 @@ const SignupScreen = ({ route }) => {
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId:
@@ -81,6 +82,15 @@ const SignupScreen = ({ route }) => {
   };
 
   const handleSubmit = async () => {
+    if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
+      setErrorMessage("Please fill in all required fields.");
+      return;
+    }
+
+    // if (!validateEmail(email)) {
+    //   setErrorMessage("Please enter a valid email address.");
+    //   return;
+    // }
     try {
       const userInfo = {
         name: name,
@@ -152,6 +162,9 @@ const SignupScreen = ({ route }) => {
         Horen
       </Text>
       <View style={styles.form}>
+        {errorMessage !== "" && (
+          <Text style={styles.errorText}>{errorMessage}</Text>
+        )}
         <TextInput
           style={styles.input}
           placeholder="Username"
@@ -217,7 +230,7 @@ const SignupScreen = ({ route }) => {
         <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
           <Text style={{ color: "white" }}>Sign Up</Text>
         </TouchableOpacity>
-        {userInfo === null ? (
+        {/* {userInfo === null ? (
           <TouchableOpacity
             style={styles.googleButton}
             disabled={!request}
@@ -232,7 +245,7 @@ const SignupScreen = ({ route }) => {
           </TouchableOpacity>
         ) : (
           <Text style={styles.text}>{userInfo.name}</Text>
-        )}
+        )} */}
       </View>
       <View style={styles.loginContainer}>
         <Text style={styles.loginText}>Already have an account?</Text>
@@ -290,6 +303,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   loginText: {
+    fontWeight: "bold",
     color: "black",
     marginRight: 5,
   },
@@ -326,6 +340,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  errorText: {
+    color: "red",
+    fontWeight: "600",
+    fontSize: 16,
+    marginTop: 10,
+    textAlign: "center",
   },
 });
 export default SignupScreen;

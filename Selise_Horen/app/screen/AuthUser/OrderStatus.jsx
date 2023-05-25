@@ -29,14 +29,6 @@ const OrderStatus = ({ navigation }) => {
         .catch((error) => console.error(error));
     }, [])
   );
-  // useEffect(() => {
-  //   fetch(`${config.API_URL}/order`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setorderData(data);
-  //     })
-  //     .catch((error) => console.error(error));
-  // }, []);
 
   return (
     <View style={styles.container}>

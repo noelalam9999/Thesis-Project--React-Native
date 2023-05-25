@@ -24,6 +24,7 @@ import hour from "../../../assets/image/24-hours.png";
 import sad from "../../../assets/image/sad.png";
 
 import { LineChart } from "react-native-chart-kit";
+import { useFocusEffect } from "@react-navigation/core";
 const data = [
   {
     name: "Sat",
@@ -83,20 +84,16 @@ const ClaimDevice = () => {
   const [claimedAlertVisible, setClaimedAlertVisible] = useState(false);
   const [scannedAlertVisible, setScannedAlertVisible] = useState(false);
 
-  useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === "granted");
-    };
+  useFocusEffect(
+    React.useCallback(() => {
+      const getBarCodeScannerPermissions = async () => {
+        const { status } = await BarCodeScanner.requestPermissionsAsync();
+        setHasPermission(status === "granted");
+      };
 
-    getBarCodeScannerPermissions();
-  }, []);
-
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     setScanned(false);
-  //   }
-  // }, [isFocused]);
+      getBarCodeScannerPermissions();
+    }, [])
+  );
 
   const handleBarCodeScanned = async ({ type, data }) => {
     try {
@@ -110,8 +107,8 @@ const ClaimDevice = () => {
       );
 
       const deviceInfo = await deviceInfoResponse.json();
-
-      if (deviceInfo.user_id) {
+      console.log("deviceInfo", deviceInfo);
+      if (deviceInfo[0].user_id) {
         setClaimedAlertVisible(true);
       } else {
         const updateDeviceInfo = { ...deviceInfo, user_id: userId };
@@ -153,7 +150,7 @@ const ClaimDevice = () => {
               <Text style={styles.alertText}>Oops, device already claimed</Text>
             </>
           )}
-          {scannedAlertVisible && (
+          {scannedAlertVisible && !claimedAlertVisible && (
             <>
               <Image source={party} style={{ height: 30, width: 30 }}></Image>
               <Text style={styles.alertText}>

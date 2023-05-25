@@ -10,7 +10,7 @@ import {
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
-import { VictoryScatter, VictoryChart } from "victory-native";
+import { VictoryScatter, VictoryChart, Rect } from "victory-native";
 import badge from "../../../assets/image/black-badge.png";
 import noise from "../../../assets/image/noise.png";
 import pollution from "../../../assets/image/noise-pollution.png";
@@ -18,9 +18,12 @@ import road from "../../../assets/image/road.png";
 import hour from "../../../assets/image/24-hours.png";
 import scatter from "../../../assets/image/scatter-plot.png";
 import { ECharts } from "react-native-echarts-wrapper";
+import { useFocusEffect } from "@react-navigation/core";
+import config from "../../config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const chartData1 = [
-  { x: 1, y: 50 },
-  { x: 5, y: 30 },
+  { z: 1, z: 50 },
+  { z: 5, z: 30 },
   { x: 10, y: 70 },
   { x: 15, y: 20 },
   { x: 20, y: 80 },
@@ -56,6 +59,51 @@ for (let x = -30; x <= 30; x++) {
 const HomeScreen = () => {
   const [isYearView, setIsYearView] = useState(true);
   const [isMonthView, setIsMonthView] = useState(false);
+  const [chart1Data, setchart1DAta] = useState([]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchchartData = async () => {
+        try {
+          const userId = await AsyncStorage.getItem("userId");
+          const deviceResponse = await fetch(
+            `${config.Device_URL}/device/user_id/${userId}`
+          );
+          const deviceData = await deviceResponse.json();
+
+          const ruId = deviceData[0].RU_id;
+
+          const requestBody = {
+            deviceRUids: [ruId],
+          };
+          console.log("req", requestBody);
+          const response = await fetch(
+            `${config.SIGNAL_URL}/signal/SignalSumByDateByDevices`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestBody),
+            }
+          );
+          const chartData = await response.json().then((res) => {
+            return res.map((item) => {
+              return {
+                x: item._id,
+                y: item.horn_count,
+              };
+            });
+          });
+          console.log(chartData);
+          setchart1DAta(chartData);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchchartData();
+    }, [])
+  );
 
   const handlePress = () => {
     if (isYearView) {
@@ -73,21 +121,6 @@ const HomeScreen = () => {
   };
   const progress = 0.5;
   const level = Math.ceil(progress * 10);
-  const option = {
-    xAxis: {
-      type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    },
-    yAxis: {
-      type: "value",
-    },
-    series: [
-      {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: "line",
-      },
-    ],
-  };
 
   return (
     <View style={styles.background}>
@@ -185,7 +218,7 @@ const HomeScreen = () => {
             }}
             width={Dimensions.get("window").width}
             height={220}
-            yAxisSuffix="%"
+            yAxisSuffix=""
             yAxisInterval={1}
             chartConfig={{
               backgroundColor: "#F7CF47",
