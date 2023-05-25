@@ -200,12 +200,36 @@ const HomeScreen = () => {
         </View>
 
         <View style={styles.containerWrapper}>
+          <View style={styles.flexContainer}>
+            <TouchableOpacity style={styles.button} onPress={handlePress}>
+              <Text
+                style={[
+                  styles.buttonText,
+                  isYearView ? styles.activeButtonText : null,
+                ]}
+              >
+                {isYearView && "Year View"}
+                {isMonthView && "Month View"}
+                {!isYearView && !isMonthView && "Week View"}
+              </Text>
+            </TouchableOpacity>
+
+            <SelectDropdown
+              data={Devices}
+              onSelect={(selectedItem, index) => {
+                console.log(selectedItem, index);
+              }}
+              buttonStyle={styles.dropdownButton}
+              buttonTextStyle={styles.dropdownButtonText}
+              dropdownStyle={styles.dropdown}
+              dropdownTextStyle={styles.dropdownText}
+              defaultButtonText="Device change"
+            />
+          </View>
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-              Number of Horns played per day
-            </Text>
+            <Text style={{ fontSize: 15 }}>Number of Horns played per day</Text>
           </View>
           <LineChart
             data={{
@@ -248,9 +272,7 @@ const HomeScreen = () => {
               marginTop: 20,
             }}
           >
-            <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-              Global Ranking
-            </Text>
+            <Text style={{ fontSize: 15 }}>Global Ranking</Text>
           </View>
           <LineChart
             data={{
@@ -324,7 +346,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7CF47",
   },
-  container: { flexDirection: "row", justifyContent: "space-around" },
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
+  flexContainer: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "center",
+  },
   title: {
     fontSize: 16,
     fontWeight: "bold",
@@ -333,29 +367,23 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   button: {
-    //marginLeft: 5,
     backgroundColor: "#000000",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "35%",
-    paddingVertical: 8,
+    width: "50%",
+    paddingVertical: 2,
     paddingHorizontal: 5,
     borderRadius: 30,
     borderWidth: 1,
     borderColor: "#000000",
-    marginTop: 20,
-    // marginLeft: 5,
-    // marginRight: 40,
+    height: "30px",
   },
   dropdownButton: {
+    paddingVertical: 2,
     backgroundColor: "#000000",
     borderRadius: 30,
     borderWidth: 1,
     borderColor: "#000000",
     marginTop: 20,
-    width: "40%",
-    // marginLeft: 20,
-    // marginRight: 40,
+    width: "50%",
   },
   dropdownButtonText: {
     color: "#F7CF47",
@@ -449,14 +477,14 @@ const styles = StyleSheet.create({
   },
   box: {
     paddingVertical: 30,
+    //borderWidth: 1,
     borderColor: "#000",
     borderRadius: 15,
     padding: 10,
     marginBottom: 10,
     backgroundColor: "#F7CF47",
     width: "45%",
-    marginLeft: 8,
-    marginRight: 12,
+    justifyContent: "center",
     alignItems: "center",
     elevation: 6,
     shadowColor: "#000",
