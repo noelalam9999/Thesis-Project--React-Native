@@ -92,11 +92,7 @@ const ClaimDevice = () => {
     getBarCodeScannerPermissions();
   }, []);
 
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     setScanned(false);
-  //   }
-  // }, [isFocused]);
+  
 
   const handleBarCodeScanned = async ({ type, data }) => {
     try {

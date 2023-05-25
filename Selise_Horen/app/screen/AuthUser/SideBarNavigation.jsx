@@ -17,7 +17,8 @@ import SuccessScreen from "./SuccessScreen";
 import HomeScreen from "./HomeScreen";
 import LoginScreen from "../LoginScreen";
 import SignupScreen from "../SignupScreen";
-
+import DeviceDetail from "./DeviceDetails";
+import EditProfile from "./EditProfile";
 import LeaderboardScreen from "./leaderboardScreen";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
@@ -139,7 +140,7 @@ const AppNavigator = () => {
           <Drawer.Screen
             name="DashBoard"
             options={{
-              drawerIcon: () => <Icon name="home" size={24} color="#F7CF47" />,
+              drawerIcon: () => <Icon name="home" size={24} color="#F7CF47" style={{ paddingLeft: 20 }} />,
               title: "Dashboard",
               headerStyle: {
                 backgroundColor: "#000000",
@@ -151,6 +152,8 @@ const AppNavigator = () => {
               },
               drawerLabelStyle: {
                 color: "#F7CF47",
+                marginLeft: -15,
+                
               },
             }}
             component={TabNavigator}
@@ -159,7 +162,7 @@ const AppNavigator = () => {
             name="Heat map"
             options={{
               drawerIcon: () => (
-                <Icon name="map-marker" size={24} color="#F7CF47" />
+                <Icon name="map-marker" size={24} color="#F7CF47" style={{ paddingLeft: 20 }}/>
               ),
 
               headerStyle: {
@@ -172,6 +175,7 @@ const AppNavigator = () => {
               },
               drawerLabelStyle: {
                 color: "#F7CF47",
+                marginLeft: -5,
               },
             }}
             component={HeatMap}
@@ -180,7 +184,7 @@ const AppNavigator = () => {
             name="Device List"
             options={{
               drawerIcon: () => (
-                <Icon name="list-alt" size={24} color="#F7CF47" />
+                <Icon name="list-alt" size={24} color="#F7CF47"style={{ paddingLeft: 20 }} />
               ),
 
               headerStyle: {
@@ -193,6 +197,7 @@ const AppNavigator = () => {
               },
               drawerLabelStyle: {
                 color: "#F7CF47",
+                marginLeft: -15,
               },
             }}
             component={DeviceList}
@@ -200,7 +205,7 @@ const AppNavigator = () => {
           <Drawer.Screen
             name="Order Status"
             options={{
-              drawerIcon: () => <Icon name="check" size={24} color="#F7CF47" />,
+              drawerIcon: () => <Icon name="check" size={24} color="#F7CF47"   style={{ paddingLeft: 20 }}/>,
 
               headerStyle: {
                 backgroundColor: "#000000",
@@ -212,6 +217,7 @@ const AppNavigator = () => {
               },
               drawerLabelStyle: {
                 color: "#F7CF47",
+                marginLeft: -15,
               },
             }}
             component={OrderStatus}
@@ -219,7 +225,7 @@ const AppNavigator = () => {
           <Drawer.Screen
             name="Profile"
             options={{
-              drawerIcon: () => <Icon name="user" size={24} color="#F7CF47" />,
+              drawerIcon: () => <Icon name="user" size={24} color="#F7CF47"  style={{ paddingLeft: 20 }} />,
 
               headerStyle: {
                 backgroundColor: "#000000",
@@ -231,6 +237,7 @@ const AppNavigator = () => {
               },
               drawerLabelStyle: {
                 color: "#F7CF47",
+                marginLeft: -8,
               },
             }}
             initialParams={{
@@ -242,7 +249,7 @@ const AppNavigator = () => {
             name="Purchase-Device"
             options={{
               drawerIcon: () => (
-                <Icon name="buysellads" size={24} color="#F7CF47" />
+                <Icon name="buysellads" size={24} color="#F7CF47"   style={{ paddingLeft: 20 }} />
               ),
 
               headerStyle: {
@@ -252,6 +259,7 @@ const AppNavigator = () => {
               headerTitleStyle: {
                 fontWeight: "bold",
                 color: "#F7CF47",
+                marginLeft: -10,
               },
               drawerLabelStyle: {
                 color: "#F7CF47",
@@ -267,6 +275,7 @@ const AppNavigator = () => {
                   name="qr-code-scanner"
                   size={24}
                   color="#F7CF47"
+                  style={{ paddingLeft: 20 }}
                 />
               ),
               headerStyle: {
@@ -279,11 +288,44 @@ const AppNavigator = () => {
               },
               drawerLabelStyle: {
                 color: "#F7CF47",
+                marginLeft: -13,
               },
             }}
             component={ClaimDevice}
           />
+           {/* Hide screen */}
+         <Drawer.Screen
+         name="EditProfile"
+         options={{
+           drawerItemStyle: { display: "none" },
+           headerStyle: {
+             backgroundColor: "#000000",
+           },
+           headerTintColor: "#F7CF47",
+           headerTitleStyle: {
+             fontWeight: "bold",
+             color: "#F7CF47",
+           },
+         }}
+         component={EditProfile}
+       />
+       <Drawer.Screen
+            name="DeviceDetail"
+            options={{
+              drawerItemStyle: { display: "none" },
+              headerStyle: {
+                backgroundColor: "#000000",
+              },
+              headerTintColor: "#F7CF47",
+              headerTitleStyle: {
+                fontWeight: "bold",
+                color: "#F7CF47",
+              },
+            }}
+            component={DeviceDetail}
+          />
         </Drawer.Navigator>
+        
       ) : (
         <Drawer.Navigator>
           <Drawer.Screen

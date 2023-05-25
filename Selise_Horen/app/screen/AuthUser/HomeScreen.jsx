@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
 } from "react-native";
+import io from 'socket.io-client';
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
@@ -60,6 +61,9 @@ const HomeScreen = () => {
   const [isYearView, setIsYearView] = useState(true);
   const [isMonthView, setIsMonthView] = useState(false);
   const [chart1Data, setchart1DAta] = useState([]);
+  const [devices, setDevices] = useState([]);
+  const [socket, setSocket] = useState(null);
+  const [message,setMessage] = useState()
 
   useFocusEffect(
     React.useCallback(() => {
@@ -70,6 +74,7 @@ const HomeScreen = () => {
             `${config.Device_URL}/device/user_id/${userId}`
           );
           const deviceData = await deviceResponse.json();
+          setDevices(deviceData);
           const ruId = deviceData[0].RU_id;
           const requestBody = {
             deviceRUids: [ruId],
@@ -93,7 +98,8 @@ const HomeScreen = () => {
               };
             });
           });
-          console.log(chartData);
+          
+          setDevices(deviceData);
           setchart1DAta(chartData);
         } catch (error) {
           console.log(error);
@@ -102,6 +108,31 @@ const HomeScreen = () => {
       fetchchartData();
     }, [])
   );
+
+    React.useEffect(() => {
+      console.log()
+      if (devices.length>0) {
+        const socket = io('https://7431-113-11-37-36.ngrok-free.app', {
+          query: {
+            deviceRUid: "BUS_03",
+          },
+        });
+  
+        setSocket(socket);
+      }
+    }, [devices]);
+
+    React.useEffect(() => {
+      if (socket) {
+        socket.on('newSignal', (data) => {
+          console.log(data)
+          setMessage(data);
+        });
+      }
+    }, [socket]);
+  
+
+
 
   const handlePress = () => {
     if (isYearView) {
@@ -217,7 +248,7 @@ const HomeScreen = () => {
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
             <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-              Number of Horns played per day
+              Number of Horns played per day {message}
             </Text>
           </View>
           {
@@ -233,7 +264,7 @@ const HomeScreen = () => {
             }}
             width={Dimensions.get("window").width}
             height={220}
-            yAxisSuffix="%"
+            yAxisSuffix=""
             yAxisInterval={1}
             chartConfig={{
               backgroundColor: "#F7CF47",
