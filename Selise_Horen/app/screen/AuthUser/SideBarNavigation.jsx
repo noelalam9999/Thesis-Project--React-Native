@@ -31,6 +31,8 @@ import { useEffect, useState } from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import ClaimDevice from "./ClaimDevice";
 import { TouchableOpacity } from "react-native";
+import EditProfile from "./EditProfile";
+import DeviceDetail from "./DeviceDetails";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -263,6 +265,7 @@ const AppNavigator = () => {
               },
               drawerLabelStyle: {
                 color: "#F7CF47",
+                marginLeft: -10,
               },
             }}
             component={PurchaseDevice}
@@ -352,6 +355,7 @@ const AppNavigator = () => {
               isLoggedIn: setLoggedIn,
             }}
           />
+
           {/* <Drawer.Screen
             name="Profile"
             options={{

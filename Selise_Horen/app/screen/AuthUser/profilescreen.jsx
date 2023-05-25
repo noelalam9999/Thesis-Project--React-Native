@@ -10,6 +10,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import bronze from "../../../assets/image/bronze-medal.png";
 import silver from "../../../assets/image/silver-medal.png";
 import gold from "../../../assets/image/gold-medal.png";
+import { useLinkProps } from "@react-navigation/native";
 
 const LinechartData = [
   { x: 1, y: 10 },
@@ -25,6 +26,7 @@ const LinechartData = [
 ];
 
 const ProfileScreen = ({ navigation, route }) => {
+  const editProfileLinkProps = useLinkProps({ to: "/EditProfile" });
   const [accessToken, setAccessToken] = useState("");
 
   const { isLoggedIn } = route.params;

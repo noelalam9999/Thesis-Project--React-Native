@@ -11,24 +11,20 @@ import io from 'socket.io-client';
 import { LineChart } from "react-native-chart-kit";
 import { Dimensions } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
-import { VictoryScatter, VictoryChart } from "victory-native";
+import { VictoryScatter, VictoryChart, Rect } from "victory-native";
 import badge from "../../../assets/image/black-badge.png";
 import noise from "../../../assets/image/noise.png";
 import pollution from "../../../assets/image/noise-pollution.png";
 import road from "../../../assets/image/road.png";
 import hour from "../../../assets/image/24-hours.png";
+
 import { useFocusEffect } from "@react-navigation/core";
 import config from "../../config";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const chartData1 = [
-  { x: 1, y: 50 },
-  { x: 5, y: 30 },
-  { x: 10, y: 70 },
-  { x: 15, y: 20 },
-  { x: 20, y: 80 },
-  { x: 25, y: 87 },
-];
+
+
+
 const Devices = [
   "Device Change",
   "Toyota Camry",
@@ -76,6 +72,8 @@ const HomeScreen = () => {
           const deviceData = await deviceResponse.json();
           setDevices(deviceData);
           const ruId = deviceData[0].RU_id;
+
+
           const requestBody = {
             deviceRUids: [ruId],
           };
@@ -150,21 +148,6 @@ const HomeScreen = () => {
   };
   const progress = 0.5;
   const level = Math.ceil(progress * 10);
-  const option = {
-    xAxis: {
-      type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    },
-    yAxis: {
-      type: "value",
-    },
-    series: [
-      {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: "line",
-      },
-    ],
-  };
 
   return (
     <View style={styles.background}>
@@ -244,6 +227,32 @@ const HomeScreen = () => {
         </View>
 
         <View style={styles.containerWrapper}>
+          <View style={styles.flexContainer}>
+            <TouchableOpacity style={styles.button} onPress={handlePress}>
+              <Text
+                style={[
+                  styles.buttonText,
+                  isYearView ? styles.activeButtonText : null,
+                ]}
+              >
+                {isYearView && "Year View"}
+                {isMonthView && "Month View"}
+                {!isYearView && !isMonthView && "Week View"}
+              </Text>
+            </TouchableOpacity>
+
+            <SelectDropdown
+              data={Devices}
+              onSelect={(selectedItem, index) => {
+                console.log(selectedItem, index);
+              }}
+              buttonStyle={styles.dropdownButton}
+              buttonTextStyle={styles.dropdownButtonText}
+              dropdownStyle={styles.dropdown}
+              dropdownTextStyle={styles.dropdownText}
+              defaultButtonText="Device change"
+            />
+          </View>
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
@@ -297,9 +306,7 @@ const HomeScreen = () => {
               marginTop: 20,
             }}
           >
-            <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-              Global Ranking
-            </Text>
+            <Text style={{ fontSize: 15 }}>Global Ranking</Text>
           </View>
           <LineChart
             data={{
@@ -373,7 +380,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F7CF47",
   },
-  container: { flexDirection: "row", justifyContent: "space-around" },
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
+  flexContainer: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "center",
+  },
   title: {
     fontSize: 16,
     fontWeight: "bold",
@@ -382,29 +401,23 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   button: {
-    //marginLeft: 5,
     backgroundColor: "#000000",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "35%",
-    paddingVertical: 8,
+    width: "50%",
+    paddingVertical: 2,
     paddingHorizontal: 5,
     borderRadius: 30,
     borderWidth: 1,
     borderColor: "#000000",
-    marginTop: 20,
-    // marginLeft: 5,
-    // marginRight: 40,
+    height: "30px",
   },
   dropdownButton: {
+    paddingVertical: 2,
     backgroundColor: "#000000",
     borderRadius: 30,
     borderWidth: 1,
     borderColor: "#000000",
     marginTop: 20,
-    width: "40%",
-    // marginLeft: 20,
-    // marginRight: 40,
+    width: "50%",
   },
   dropdownButtonText: {
     color: "#F7CF47",
@@ -498,14 +511,14 @@ const styles = StyleSheet.create({
   },
   box: {
     paddingVertical: 30,
+    //borderWidth: 1,
     borderColor: "#000",
     borderRadius: 15,
     padding: 10,
     marginBottom: 10,
     backgroundColor: "#F7CF47",
     width: "45%",
-    marginLeft: 8,
-    marginRight: 12,
+    justifyContent: "center",
     alignItems: "center",
     elevation: 6,
     shadowColor: "#000",
