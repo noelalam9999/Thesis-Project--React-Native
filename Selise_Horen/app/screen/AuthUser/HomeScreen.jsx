@@ -16,8 +16,10 @@ import noise from "../../../assets/image/noise.png";
 import pollution from "../../../assets/image/noise-pollution.png";
 import road from "../../../assets/image/road.png";
 import hour from "../../../assets/image/24-hours.png";
-import scatter from "../../../assets/image/scatter-plot.png";
-import { ECharts } from "react-native-echarts-wrapper";
+import { useFocusEffect } from "@react-navigation/core";
+import config from "../../config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const chartData1 = [
   { x: 1, y: 50 },
   { x: 5, y: 30 },
@@ -51,11 +53,55 @@ const chartData3 = [];
 for (let x = -30; x <= 30; x++) {
   const y = Math.exp(-(x * x) / 100);
   chartData3.push({ x, y });
+
 }
 
 const HomeScreen = () => {
   const [isYearView, setIsYearView] = useState(true);
   const [isMonthView, setIsMonthView] = useState(false);
+  const [chart1Data, setchart1DAta] = useState([]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchchartData = async () => {
+        try {
+          const userId = await AsyncStorage.getItem("userId");
+          const deviceResponse = await fetch(
+            `${config.Device_URL}/device/user_id/${userId}`
+          );
+          const deviceData = await deviceResponse.json();
+          const ruId = deviceData[0].RU_id;
+          const requestBody = {
+            deviceRUids: [ruId],
+          };
+          console.log("req", requestBody);
+          const response = await fetch(
+            `${config.SIGNAL_URL}/signal/SignalSumByDateByDevices`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestBody),
+            }
+          );
+          const chartData = await response.json().then((res) => {
+            return res.map((item) => {
+              return {
+                x: item._id,
+                y: item.horn_count,
+              };
+            });
+          });
+          console.log(chartData);
+          setchart1DAta(chartData);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchchartData();
+    }, [])
+  );
 
   const handlePress = () => {
     if (isYearView) {
@@ -174,12 +220,14 @@ const HomeScreen = () => {
               Number of Horns played per day
             </Text>
           </View>
-          <LineChart
+          {
+            chart1Data.length > 0 ?  (
+            <LineChart
             data={{
-              labels: chartData1.map((dataPoint) => dataPoint.x),
+              labels: chart1Data.map((dataPoint) => dataPoint.x),
               datasets: [
                 {
-                  data: chartData1.map((dataPoint) => dataPoint.y),
+                  data: chart1Data.map((dataPoint) => dataPoint.y),
                 },
               ],
             }}
@@ -205,6 +253,9 @@ const HomeScreen = () => {
               marginRight: 30,
             }}
           />
+            ) : null
+          }
+          
         </View>
         <View style={styles.containerWrapper}>
           <View
